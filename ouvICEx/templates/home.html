@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> Home</title>
-    </head>
+{% extends "base.html" %}
+{% block title %} Home Page{% endblock %}
+{% block content %}
+    <h2>Explicação do funcionamento do sistema:</h2>
+        <p>Faça as suas denúncias de forma anônima ou não. É só ir no formulário e enviar os seus comentários. Para ler outras denúncias, vá a página de denúncias para ler.</p>
 
-    <body>
-        <h1>Home page</h1>
-    </body>
-</html>
+    <h2>Porque criamos o ouvICEx???</h2>
+        <p>Nosso propósito é fazer com que os alunos tenham um espaço aberto para exporem tudo que os incomoda para que possamos sempre saber o que devemos cobrar e de quem, de forma a criar um ambiente mais saudável dentro dos corredores do ICEx.</p>
+{% endblock %}
