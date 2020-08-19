@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 
@@ -33,6 +33,23 @@ def home():
 def view():
     return render_template("view.html", values = posts.query.all())
 
+@app.route("/form", methods=["POST", "GET"])
+def form():
+    if request.method == "POST":
+        post = request.form["post"]
+        date = datetime.date.today()
+        author_dep = request.form["author_dep"]
+        ref_dep = request.form["ref_dep"]
+        context_t = request.form["context_t"]
+        situation_t = request.form["situation_t"]
+        envio = posts(post, date, author_dep, ref_dep, context_t, situation_t)
+        db.session.add(envio)
+        db.session.commit()
+        flash("Informações enviadas!")
+        return render_template("form.html")
+    else:
+        return render_template("form.html")
+    
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
