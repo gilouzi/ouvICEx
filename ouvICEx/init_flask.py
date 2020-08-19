@@ -1,7 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 app = Flask(__name__)
+app.secret_key = "teste"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.sqlite3'
 app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
 
@@ -28,6 +30,22 @@ class posts(db.Model):
 def home():
     return render_template("home.html")
 
+@app.route("/form", methods=["POST", "GET"])
+def form():
+    if request.method == "POST":
+        post = request.form["post"]
+        date = datetime.date.today()
+        author_dep = request.form["author_dep"]
+        ref_dep = request.form["ref_dep"]
+        context_t = request.form["context_t"]
+        situation_t = request.form["situation_t"]
+        envio = posts(post, date, author_dep, ref_dep, context_t, situation_t)
+        db.session.add(envio)
+        db.session.commit()
+        flash("Informações enviadas!")
+        return render_template("form.html")
+    else:
+        return render_template("form.html")
 
 if __name__ == "__main__":
     db.create_all()
