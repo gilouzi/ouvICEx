@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %} View Page{% endblock %}
+{% block content %}
+    {% for item in values %}
+        <p>post: {{item.post}}, 
+           date: {{item.date}},
+           author_dep: {{item.author_dep}},
+           ref_dep: {{item.ref_dep}},
+           context_t: {{item.context_t}},
+           situation_t: {{item.situation_t}},</p>
+    {% endfor %}
+{% endblock %}

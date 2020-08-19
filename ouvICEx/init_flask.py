@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 app = Flask(__name__)
-app.secret_key = "teste"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.sqlite3'
 app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
 
@@ -29,7 +28,10 @@ class posts(db.Model):
 @app.route("/")
 def home():
     return render_template("home.html")
-
+@app.route("/view")
+def view():
+    return render_template("view.html", values = posts.query.all())
+  
 @app.route("/form", methods=["POST", "GET"])
 def form():
     if request.method == "POST":
