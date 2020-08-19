@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -28,7 +28,16 @@ class posts(db.Model):
 def home():
     return render_template("home.html")
 
+@app.route("/historico", methods=["POST", "GET"])
+def historico():
+    if request.method == "POST":
+        dpt = request.form["dpt"]
+        return render_template("historico.html", values=posts.query.filter_by(ref_dep=dpt))
+    else:
+        return render_template("historico.html", values=posts.query.all())
+
 
 if __name__ == "__main__":
     db.create_all()
+
     app.run(debug=True)
