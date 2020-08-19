@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.sqlite3'
@@ -28,6 +29,9 @@ class posts(db.Model):
 def home():
     return render_template("home.html")
 
+@app.route("/view")
+def view():
+    return render_template("view.html", values = posts.query.all())
 
 if __name__ == "__main__":
     db.create_all()
