@@ -1,7 +1,10 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
+from admin.posts import b_posts
+
 app = Flask(__name__)
+app.register_blueprint(b_posts, url_prefix="/admin")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.sqlite3'
 app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
 
