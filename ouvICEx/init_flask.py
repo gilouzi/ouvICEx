@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+from scripts import analyses as anl
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.sqlite3'
@@ -50,9 +51,18 @@ def form():
     else:
         return render_template("form.html")
 
-@app.route("/analyses")
+@app.route("/analyses", methods=["POST", "GET"])
 def analyses():
-    return "analyses content"
+    #print("entrou")
+    #anl.test()
+    #return "analyses content"
+    if request.method == "GET":
+        return render_template(
+                    "analyses.html",
+                    values = posts.query.all()
+                )
+    else:
+        return "ERROR"
 
 if __name__ == "__main__":
     db.create_all()
