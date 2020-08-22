@@ -49,7 +49,11 @@ def form():
         return render_template("form.html")
     else:
         return render_template("form.html")
-    
+
+@app.route("/analyses")
+def analyses():
+    return "analyses content"
+
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
