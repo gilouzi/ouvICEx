@@ -46,3 +46,14 @@ Sistema web de ouvidoria pra denúncias e reclamações aberto aos alunos do ICE
     - Criar a página do administrador, que estará conectado ao banco de dados contendo as postagens; (Thiago)
     - Adicionar botão que marca as postagens como resolvidas ou não (Thiago)
     - Criar filtros específicos por data, departamento (denunciado e usuário), tipo e estado da postagem. (Isadora)
+
+- Rodando o projeto
+ - Clone o repositório
+ - Forneça permissões de execução ao arquivo de setup e execução
+ ```
+ chmod +x setup_and_run.sh 
+ ```
+ - Execute o arquivo .sh
+ ```
+ ./setup_and_run.sh
+ ```
