@@ -29,7 +29,7 @@ class posts(db.Model):
 def home():
     return render_template("home.html")
 
-<<<<<<< HEAD
+
 @app.route("/historico", methods=["POST", "GET"])
 def historico():
     if request.method == "POST":
@@ -38,11 +38,11 @@ def historico():
     else:
         return render_template("historico.html", values=posts.query.all())
 
-=======
+
 @app.route("/view")
 def view():
     return render_template("view.html", values = posts.query.all())
->>>>>>> 425c2890c64bd5d2892ef4b648169dbe36d79e02
+
 
 @app.route("/form", methods=["POST", "GET"])
 def form():
@@ -60,11 +60,8 @@ def form():
         return render_template("form.html")
     else:
         return render_template("form.html")
-    
+
 if __name__ == "__main__":
     db.create_all()
-<<<<<<< HEAD
 
-=======
->>>>>>> 425c2890c64bd5d2892ef4b648169dbe36d79e02
     app.run(debug=True)
