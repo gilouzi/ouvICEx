@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 
@@ -33,8 +33,12 @@ def home():
 @app.route("/historico", methods=["POST", "GET"])
 def historico():
     if request.method == "POST":
-        dpt = request.form["dpt"]
-        return render_template("historico.html", values=posts.query.filter_by(ref_dep=dpt))
+        if request.form["dpt"]:
+            dpt = request.form["dpt"]
+            return render_template("historico.html", values=posts.query.filter_by(ref_dep=dpt))
+
+        elif request.form["limpar"]:
+            return render_template("historico.html", values=posts.query.all())
     else:
         return render_template("historico.html", values=posts.query.all())
 
@@ -56,7 +60,7 @@ def form():
         envio = posts(post, date, author_dep, ref_dep, context_t, situation_t)
         db.session.add(envio)
         db.session.commit()
-        flash("Informações enviadas!")
+        #flash("Informações enviadas!")
         return render_template("form.html")
     else:
         return render_template("form.html")

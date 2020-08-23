@@ -1,18 +1,38 @@
 {% extends "base.html" %}
 {% block title %}Historico de todas as postagens{% endblock %}
 {% block content %}
-<form action="#" method="post">
-  <p>Departamento denunciado:</p>
-  <p><input type="text" name="dpt" /></p>
-  <p><input type="submit" value="submit" /></p>
-</form>
+  <form action="#" method="post">
+
+    <action="/action_page.php">
+    <p> Escolha um departamento do ICEx:</p>
+    <select id="dpt" name="dpt">
+      <option value="DCC">DCC</option>
+      <option value="DMAT">DMAT</option>
+      <option value="DF">DF</option>
+      <option value="DEST">DEST</option>
+    </select>
+
+
+<!--<p>Escolha um departamento do ICEx:</p>
+      <select id="dpt" name="dpt">
+        {% for item in values %}
+            <option value="{{ item.ref_dep }}">{{ item.ref_dept }}</option>
+        {% endfor %}
+      </select>
+-->
+
+      <input type="checkbox" name="limpar" value="Bike">
+      <label for="limpar"> Limpar filtros</label><br>
+      <input type="submit" value="submit">
+      <input type="reset">
+    </form>
 
   {% for item in values %}
-    <p>{{item.post}}</p>
-    <p>{{item.date}}</p>
-    <p>{{item.author_dep}}</p>
-    <p>{{item.ref_dep}}</p>
-    <p>{{item.context_t}}</p>
-    <p>{{item.situation_t}}</p>
+    <p>post: {{item.post}},
+       date: {{item.date}},
+       author_dep: {{item.author_dep}},
+       ref_dep: {{item.ref_dep}},
+       context_t: {{item.context_t}},
+       situation_t: {{item.situation_t}},</p>
   {% endfor %}
 {% endblock %}
