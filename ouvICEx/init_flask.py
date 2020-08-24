@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 from scripts import analyses as anl
 from scripts.history import app_history
-from scripts.database import db
+from scripts.database import db, posts
 
 app = Flask(__name__)
 app.register_blueprint(app_history, url_prefix="")
