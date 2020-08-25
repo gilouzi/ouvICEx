@@ -4,27 +4,25 @@
   <form action="#" method="post">
 
     <action="/action_page.php">
-    <p> Escolha um departamento do ICEx:</p>
+    <p> Departamento referenciado:</p>
     <select id="ref_dpt" name="ref_dpt">
       <option value="0">Please select</option>
-      <option value="DCC">DCC</option>
-      <option value="DMAT">DMAT</option>
-      <option value="DF">DF</option>
-      <option value="DEST">DEST</option>
+      {% for i in ref %}
+        <option value="{{i[0]}}">{{i[0]}}</option>
+      {% endfor %}
     </select>
 
-    <p> Escolha um departamento do ICEx:</p>
+    <p> Departamento do autor:</p>
     <select id="author_dpt" name="author_dpt">
       <option value="0">Please select</option>
-      <option value="DCC">DCC</option>
-      <option value="DMAT">DMAT</option>
-      <option value="DF">DF</option>
-      <option value="DEST">DEST</option>
+      {% for i in author %}
+        <option value="{{i[0]}}">{{i[0]}}</option>
+      {% endfor %}
     </select>
 
-      <input type="submit" value="submit">
-      
-      <input type="reset" value="reset">
+    <input type="submit" value="submit">
+
+    <input type="reset" value="reset">
     </form>
 
   {% for item in values %}
