@@ -10,3 +10,10 @@ def analyses():
 			"analyses.html",
 	 		values = posts.query.all()
 		)
+	elif request.method == "POST":
+		btn = request.form["btn_plot"]
+		return str(btn)
+		#return render_template(
+		#	"form.html",
+	 	#	values = posts.query.all()
+		#)

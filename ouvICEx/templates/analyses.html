@@ -17,7 +17,8 @@
            context_t: {{item.context_t}},
            situation_t: {{item.situation_t}},</p>
     {% endfor %}
-<form action="#" method="get" id="graph_form">
-	<p><input type="submit" value="Exibir gráficos"></p>
+<form action="#" method="post" id="graph_form">
+	<p><input type="submit" name="btn_plot" id="sctplot" value="Exibir scatter"></p>
+	<p><input type="submit" name="btn_plot" id="bplot" value="Exibir barplot"></p>
 </form>
 {% endblock %}
