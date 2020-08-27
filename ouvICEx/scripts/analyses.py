@@ -1,11 +1,16 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 from flask import Flask, Blueprint, render_template, request, flash
 from scripts.database import posts, db
 
 app_analyses = Blueprint("app_analyses", __name__, template_folder="templates")
 @app_analyses.route("/analyses", methods=["POST", "GET"])
 def analyses():
-	teste = values = posts.query.all()
+	
+	X = np.random.randn(30)
+	Y = 2 * X
+	
 	if request.method == "GET":
 		return render_template(
 			"analyses.html",
@@ -16,8 +21,10 @@ def analyses():
 		
 		if btn == "Exibir scatter":
 			grafico = "nesse caso viria um scatter"
-		elif  btn == "Exibir barplot":
-			grafico = "nesse caso viria um barplot"
+			figura = plt.scatter(X, Y)
+		elif btn == "Exibir histograma":
+			grafico = "nesse caso viria um histograma"
+			figura = plt.hist(X)
 			
 		return render_template(
 			"analyses.html",
