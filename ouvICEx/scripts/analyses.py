@@ -26,9 +26,12 @@ def analyses():
 			grafico = "nesse caso viria um histograma"
 			figura = plt.hist(X)
 			
+		plt.savefig("grafico.png")
+		
 		return render_template(
 			"analyses.html",
 	 		values = posts.query.all(),
-	 		grafico = grafico
+	 		grafico = grafico,
+	 		PNG = "grafico.png"
 		)
 		
