@@ -18,11 +18,11 @@ class posts(db.Model):
         self.context_t = context_t
         self.situation_t = situation_t
 
-class admin(db.Model):
+class users(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
-    email = db.Column("email", db.String(50))
+    user = db.Column("user", db.String(50))
     password = db.Column("password", db.String(50))
 
-    def __init__(self, email, password):
-        self.email = email
+    def __init__(self, user, password):
+        self.user = user
         self.password = password

@@ -2,10 +2,14 @@
 {% block title %} Login {% endblock %}
 
 {% block content %}
+    {% for msg in get_flashed_messages() %}
+        <p>{{msg}}</p>
+    {% endfor %}
+
     <h1> Login </h1>
     <form action="#" method="POST">
-        <p>Email</p>
-        <p><input type="email" name="email" placeholder="Digite o email"/></p>
+        <p> Usuário </p>
+        <p><input type="text" name="user" placeholder="Digite o usuário"/></p>
 
         <p> Senha </p>
         <p><input type="password" name="pwd" placeholder="Digite a senha"/></p>
