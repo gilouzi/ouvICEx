@@ -14,6 +14,7 @@ app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.sqlite3'
 
 @app.route("/")
+@app.route("/home")
 def home():
     return render_template("home.html")
 
