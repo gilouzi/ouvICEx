@@ -17,3 +17,12 @@ class posts(db.Model):
         self.ref_dep = ref_dep
         self.context_t = context_t
         self.situation_t = situation_t
+
+class admin(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    email = db.Column("email", db.String(50))
+    password = db.Column("password", db.String(50))
+
+    def __init__(self, email, password):
+        self.email = email
+        self.password = password

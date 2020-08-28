@@ -3,13 +3,13 @@
 
 {% block content %}
     <h1> Login </h1>
-    <form action="#" method='post'>
-        <p><label for="uname"><b> Usuário </b></label></p>
-        <input type="text" placeholder="Digite o usuário" name="uname" required/>
+    <form action="#" method="POST">
+        <p>Email</p>
+        <p><input type="email" name="email" placeholder="Digite o email"/></p>
 
-        <p><label for="pswd"><b> Senha </b></label></p>
-        <input type="text" placeholder="Digite a senha" name="pswd" required/>
+        <p> Senha </p>
+        <p><input type="password" name="pwd" placeholder="Digite a senha"/></p>
         
-        <p><button type="submit" value="Login"> Login </button></p>
+        <p><input type="submit" value="Login"></p>
     </form>
 {% endblock %}

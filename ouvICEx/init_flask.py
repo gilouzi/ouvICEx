@@ -1,10 +1,12 @@
 from flask import Flask, render_template
 
 from scripts.database import db
-from scripts.admin_login import admin_login
+from scripts.admin import admin
 
 app = Flask(__name__)
-app.register_blueprint(admin_login, url_prefix="/admin")
+app.secret_key = 'secrey_key'
+
+app.register_blueprint(admin, url_prefix="/admin")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.sqlite3'
 app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
 
