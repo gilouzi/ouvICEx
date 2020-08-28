@@ -1,8 +1,0 @@
-{% extends "base.html" %}
-{% block title %} Postagens {% endblock %}
-{% block content %}
-    <p> Pagina do administrador para gerenciar as postagens </p>
-    {% for p in posts %}
-        <p> {{p.post}} </p>
-    {% endfor %}
-{% endblock %}
