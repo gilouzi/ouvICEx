@@ -1,0 +1,25 @@
+
+{% extends "base.html" %}
+{% block title %} Form Page{% endblock %}
+{% block content %}
+   {% with messages = get_flashed_messages() %}
+   {% if messages %}
+       {% for msg in messages %}
+           <p>{{msg}}</p>
+       {% endfor %}
+   {% endif %}
+   {% endwith %}
+<form action="#" method="post" id="posts_form">
+   <p>Post:</p>
+   <p><textarea form="posts_form" id="post" name="post" rows="5" cols="100"></textarea></p>
+   <p>Seu departamento:</p>
+   <p><input type="author_dep" id="author_dep" name="author_dep"></p>
+   <p>Departamento citado:</p>
+   <p><input type="ref_dep" id="ref_dep" name="ref_dep"></p>
+   <p>Contexto:</p>
+   <p><input type="context_t" id="context_t" name="context_t"></p>
+   <p>Situação:</p>
+   <p><input type="situation_t" id="situation_t" name="situation_t"></p>
+   <p><input type="submit" value="Enviar"></p>
+</form>
+{% endblock %}
