@@ -3,4 +3,13 @@
 
 {% block content %}
     <h1> Login </h1>
+    <form action="#" method='post'>
+        <p><label for="uname"><b> Usuário </b></label></p>
+        <input type="text" placeholder="Digite o usuário" name="uname" required/>
+
+        <p><label for="pswd"><b> Senha </b></label></p>
+        <input type="text" placeholder="Digite a senha" name="pswd" required/>
+        
+        <p><button type="submit" value="Login"> Login </button></p>
+    </form>
 {% endblock %}
