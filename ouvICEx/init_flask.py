@@ -3,11 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 from scripts import analyses as anl
 from scripts.history import app_history
 from scripts.form import app_form
+from scripts.analyses import app_analyses
 from scripts.database import db, posts
 
 app = Flask(__name__)
 app.register_blueprint(app_history, url_prefix="")
 app.register_blueprint(app_form, url_prefix="")
+app.register_blueprint(app_analyses, url_prefix="")
 app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.sqlite3'
 
@@ -18,7 +20,7 @@ def home():
 @app.route("/view")
 def view():
     return render_template("view.html", values = posts.query.all())
-
+  
 @app.route("/analyses", methods=["POST", "GET"])
 def analyses():
     #print("entrou")
