@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
+
 class posts(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     post = db.Column("post", db.String(500))

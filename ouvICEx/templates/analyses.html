@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Analyses Page{% endblock %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+           {% for msg in messages %}
+               <p>{{msg}}</p>
+           {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% for item in values %}
+        <p>post: {{item.post}}, 
+           date: {{item.date}},
+           author_dep: {{item.author_dep}},
+           ref_dep: {{item.ref_dep}},
+           context_t: {{item.context_t}},
+           situation_t: {{item.situation_t}},</p>
+    {% endfor %}
+<form action="#" method="get" id="graph_form">
+	<p><input type="submit" value="Exibir gráficos"></p>
+</form>
+{% endblock %}
