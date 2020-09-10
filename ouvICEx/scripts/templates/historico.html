@@ -28,6 +28,14 @@
       {% endfor %}
     </select>
 
+    <p> Situação da postagem:</p>
+    <select id="situation" name="situation">
+      <option value="0">Please select</option>
+      {% for i in situation %}
+        <option value="{{i[0]}}">{{i[0]}}</option>
+      {% endfor %}
+    </select>
+
 
     <input type="submit" value="submit">
 
