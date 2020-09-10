@@ -23,7 +23,7 @@ def home():
 @app.route("/view")
 def view():
     return render_template("view.html", values = posts.query.all())
-  
+
 @app.route("/analyses", methods=["POST", "GET"])
 def analyses():
     #print("entrou")
@@ -41,12 +41,12 @@ if __name__ == "__main__":
     db.init_app(app)
     with app.app_context():
         db.create_all()
-        
+
         # Criando usuário padrão para testes
         default_user = users.query.filter_by(user="DefaultUser").first()
         if default_user == None:
             usr = users("DefaultUser", "1234")
             db.session.add(usr)
             db.session.commit()
-            
+
     app.run(debug=True)
