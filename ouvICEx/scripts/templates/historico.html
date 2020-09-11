@@ -1,53 +1,96 @@
 {% extends "base.html" %}
 {% block title %}Historico de todas as postagens{% endblock %}
 {% block content %}
-  <form action="#" method="post">
+<meta name="historico" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-    <action="/action_page.php">
-    <p> Departamento referenciado:</p>
-    <select id="ref_dpt" name="ref_dpt">
-      <option value="0">Please select</option>
-      {% for i in ref %}
-        <option value="{{i[0]}}">{{i[0]}}</option>
-      {% endfor %}
-    </select>
+  .column {
+    float: left;
+    padding: 10px;
+    height: 100%; /* Should be removed. Only for demonstration */
+  }
 
-    <p> Departamento do autor:</p>
-    <select id="author_dpt" name="author_dpt">
-      <option value="0">Please select</option>
-      {% for i in author %}
-        <option value="{{i[0]}}">{{i[0]}}</option>
-      {% endfor %}
-    </select>
+  .left {
+    width: 20%;
+  }
 
-    <p> Contexto da postagem:</p>
-    <select id="context" name="context">
-      <option value="0">Please select</option>
-      {% for i in context %}
-        <option value="{{i[0]}}">{{i[0]}}</option>
-      {% endfor %}
-    </select>
+  .right {
+    width: 80%;
+  }
 
-    <p> Situação da postagem:</p>
-    <select id="situation" name="situation">
-      <option value="0">Please select</option>
-      {% for i in situation %}
-        <option value="{{i[0]}}">{{i[0]}}</option>
-      {% endfor %}
-    </select>
+  /* Clear floats after the columns */
+  .row:after {
+  content: "";
+  display: table;
+  clear: both;
+  }
+  </style>
+
+  <div class="row">
+    <form action="#" method="post">
+      <action="/action_page.php">
+
+      <div class="column">
+        <p> Histórico </p>
+      </div>
+      <div class="column">
+        <div class="col-md-12 mb-4">
+        <select class="form-control" id="ref_dpt" name="ref_dpt">
+          <option value="0">Departamento referenciado</option>
+          {% for i in ref %}
+            <option value="{{i[0]}}">{{i[0]}}</option>
+          {% endfor %}
+        </select>
+        </div>
+      </div>
+      <div class="column">
+        <div class="col-md-12 mb-4">
+        <select class="form-control" id="author_dpt" name="author_dpt">
+          <option value="0">Departamento do autor</option>
+          {% for i in author %}
+            <option value="{{i[0]}}">{{i[0]}}</option>
+          {% endfor %}
+        </select>
+        </div>
+    </div>
+    <div class="column">
+        <div class="col-md-12 mb-4">
+        <select class="form-control" id="context" name="context">
+          <option value="0">Contexto da postagem</option>
+          {% for i in context %}
+            <option value="{{i[0]}}">{{i[0]}}</option>
+          {% endfor %}
+        </select>
+        </div>
+      </div>
+      <div class="column">
+        <div class="col-md-12 mb-4">
+        <select class="form-control" id="situation" name="situation">
+          <option value="0">Situação da postagem</option>
+          {% for i in situation %}
+            <option value="{{i[0]}}">{{i[0]}}</option>
+          {% endfor %}
+        </select>
+        </div>
+      </div>
+
+        <input type="submit" value="submit">
+        <input type="reset" value="reset">
+
+        </div>
+      </form>
+    </div>
+        {% for item in values %}
+          <p>post: {{item.post}},
+             date: {{item.date}},
+             author_dep: {{item.author_dep}},
+             ref_dep: {{item.ref_dep}},
+             context_t: {{item.context_t}},
+             situation_t: {{item.situation_t}},</p>
+        {% endfor %}
 
 
-    <input type="submit" value="submit">
-
-    <input type="reset" value="reset">
-    </form>
-
-  {% for item in values %}
-    <p>post: {{item.post}},
-       date: {{item.date}},
-       author_dep: {{item.author_dep}},
-       ref_dep: {{item.ref_dep}},
-       context_t: {{item.context_t}},
-       situation_t: {{item.situation_t}},</p>
-  {% endfor %}
 {% endblock %}
