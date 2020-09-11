@@ -29,60 +29,67 @@
   }
   </style>
 
-  <div class="row">
-    <form action="#" method="post">
-      <action="/action_page.php">
 
-      <div class="column">
-        <p> Histórico </p>
+  <div class="jumbotron">
+  <div class="container-xl">
+    <h1 class="display-4">Histórico</h1>
+    <hr class="my-4">
+    <p class="lead">Abaixo você consegue filtrar as postagens que deseja ver:</p>
+    <div class="row">
+      <form action="#" method="post">
+        <action="/action_page.php">
+
+        <div class="column">
+          <div class="col-md-14 mb-4">
+          <select class="form-control" id="ref_dpt" name="ref_dpt">
+            <option value="0">Departamento referenciado</option>
+            {% for i in ref %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
+        </div>
+        <div class="column">
+          <div class="col-md-12 mb-4">
+          <select class="form-control" id="author_dpt" name="author_dpt">
+            <option value="0">Departamento do autor</option>
+            {% for i in author %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
       </div>
       <div class="column">
-        <div class="col-md-12 mb-4">
-        <select class="form-control" id="ref_dpt" name="ref_dpt">
-          <option value="0">Departamento referenciado</option>
-          {% for i in ref %}
-            <option value="{{i[0]}}">{{i[0]}}</option>
-          {% endfor %}
-        </select>
+          <div class="col-md-12 mb-3">
+          <select class="form-control" id="context" name="context">
+            <option value="0">Contexto</option>
+            {% for i in context %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
         </div>
+        <div class="column">
+          <div class="col-md-12 mb-3">
+          <select class="form-control" id="situation" name="situation">
+            <option value="0">Situação</option>
+            {% for i in situation %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
+        </div>
+
+        <div class="column">
+        <input class="btn btn-outline-success" type="submit" value="Submit">
+        <input class="btn btn-outline-secondary" type="reset" value="Reset">
+        </div>
+
+          </div>
+        </form>
       </div>
-      <div class="column">
-        <div class="col-md-12 mb-4">
-        <select class="form-control" id="author_dpt" name="author_dpt">
-          <option value="0">Departamento do autor</option>
-          {% for i in author %}
-            <option value="{{i[0]}}">{{i[0]}}</option>
-          {% endfor %}
-        </select>
-        </div>
     </div>
-    <div class="column">
-        <div class="col-md-12 mb-4">
-        <select class="form-control" id="context" name="context">
-          <option value="0">Contexto da postagem</option>
-          {% for i in context %}
-            <option value="{{i[0]}}">{{i[0]}}</option>
-          {% endfor %}
-        </select>
-        </div>
-      </div>
-      <div class="column">
-        <div class="col-md-12 mb-4">
-        <select class="form-control" id="situation" name="situation">
-          <option value="0">Situação da postagem</option>
-          {% for i in situation %}
-            <option value="{{i[0]}}">{{i[0]}}</option>
-          {% endfor %}
-        </select>
-        </div>
-      </div>
-
-        <input type="submit" value="submit">
-        <input type="reset" value="reset">
-
-        </div>
-      </form>
-    </div>
+  </div>
         {% for item in values %}
           <p>post: {{item.post}},
              date: {{item.date}},
