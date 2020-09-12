@@ -37,10 +37,12 @@ def history():
                 ref=db.session.query(posts.ref_dep.distinct()),
                 author=db.session.query(posts.author_dep.distinct()),
                 context=db.session.query(posts.context_t.distinct()),
-                situation=db.session.query(posts.situation_t.distinct()))
+                situation=db.session.query(posts.situation_t.distinct()),
+                num_values= values_db.count())
     else:
         return render_template("historico.html", values=posts.query.all(),
                 ref=db.session.query(posts.ref_dep.distinct()),
                 author=db.session.query(posts.author_dep.distinct()),
                 context=db.session.query(posts.context_t.distinct()),
-                situation=db.session.query(posts.situation_t.distinct()))
+                situation=db.session.query(posts.situation_t.distinct()),
+                num_values= posts.query.count())
