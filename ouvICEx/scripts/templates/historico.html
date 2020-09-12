@@ -85,19 +85,55 @@
         <input class="btn btn-outline-secondary" type="reset" value="Reset">
         </div>
 
-          </div>
         </form>
       </div>
     </div>
   </div>
-        {% for item in values %}
-          <p>post: {{item.post}},
-             date: {{item.date}},
-             author_dep: {{item.author_dep}},
-             ref_dep: {{item.ref_dep}},
-             context_t: {{item.context_t}},
-             situation_t: {{item.situation_t}},</p>
-        {% endfor %}
 
+  {% for i in range(0, num_values, 3)  %}
+    <div class="row row-cols-1 row-cols-md-3">
+        <div class="col mb-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Nome do autor/anonimo</h5>
+              <p class="card-text">{{values[i].post}}</p>
+              <li class="card-text">Departamento referenciado: {{values[i].ref_dep}}</li>
+              <li class="card-text">Departamento do autor: {{values[i].author_dep}}</li>
+              <p class="card-text"><small class="text-muted">Contexto: {{values[i].context_t}}</small></p>
+              <p class="card-text"><small class="text-muted">Situação: {{values[i].situation_t}},           {{values[i].date}}</small></p>
+            </div>
+          </div>
+        </div>
+        {% if i+1 < num_values %}
+        <div class="col mb-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Nome do autor/anonimo</h5>
+              <p class="card-text">{{values[i+1].post}}</p>
+              <li class="card-text">Departamento referenciado: {{values[i+1].ref_dep}}</li>
+              <li class="card-text">Departamento do autor: {{values[i+1].author_dep}}</li>
+              <p class="card-text"><small class="text-muted">Contexto: {{values[i+1].context_t}}</small></p>
+              <p class="card-text"><small class="text-muted">Situação: {{values[i+1].situation_t}},           {{values[i].date}}</small></p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if i+2 < num_values %}
+        <div class="col mb-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Nome do autor/anonimo</h5>
+              <p class="card-text">{{values[i+2].post}}</p>
+              <li class="card-text">Departamento referenciado: {{values[i+2].ref_dep}}</li>
+              <li class="card-text">Departamento do autor: {{values[i+2].author_dep}}</li>
+              <p class="card-text"><small class="text-muted">Contexto: {{values[i+2].context_t}}</small></p>
+              <p class="card-text"><small class="text-muted">Situação: {{values[i+2].situation_t}},           {{values[i].date}}</small></p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+  {% endfor %}
 
 {% endblock %}
