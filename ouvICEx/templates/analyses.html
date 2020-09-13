@@ -13,7 +13,7 @@
 
 
 <div class="jumbotron">
-	<div class="container-xl">
+	<div class="container-xl" style="width: 50%; float:left">
     		<h1 class="display-4">Estatísticas</h1>
     		<hr class="my-4">
     		<form action="#" method="post" id="graph_form">
@@ -59,9 +59,9 @@
 			</div>	
 		</form>
     	</div>
+    	
+    	<h2 class="display-6">{{titulo}}</h2>
+	<img src="{{grafico}}" alt="ERRO: GRÁFICO NÃO ENCONTRADO">
 </div>
 
-<img src="{{grafico}}" alt="ERRO: GRÁFICO NÃO ENCONTRADO">
-
-<p> {{tipo}} </p>
 {% endblock %}
