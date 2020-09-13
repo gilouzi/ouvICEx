@@ -1,6 +1,18 @@
 {% extends "base.html" %}
-{% block title %} Analyses Page{% endblock %}
+{% block title %} ouvICEx - Estatísticas {% endblock %}
 {% block content %}
+
+<div class="jumbotron">
+	<div class="container-xl">
+    		<h1 class="display-4">Estatísticas</h1>
+    		<hr class="my-4">
+		<p class="lead">Escolha uma opção de estatística:</p>
+		<hr class="my-4">
+		<p class="lead">Escolha o filtro:</p>
+    	</div>
+</div>
+
+
     {% with messages = get_flashed_messages() %}
         {% if messages %}
            {% for msg in messages %}
@@ -24,4 +36,5 @@
 
 <!-- <img src="{{grafico_png}}" alt="ERRO: GRÁFICO NÃO ENCONTRADO"> -->
 <img src="{{grafico}}" alt="ERRO: GRÁFICO NÃO ENCONTRADO">
+<p> {{tipo}} </p>
 {% endblock %}
