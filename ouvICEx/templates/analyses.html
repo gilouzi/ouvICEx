@@ -21,9 +21,9 @@
 			<div class="row">
 					<div class="column">
 						<div class="col-md-14 mb-4">
-							<input type="radio" id="real" name="est" value="real">
+							<input type="radio" id="real" name="est" value="real" required>
 	  						<label for="real">Total de denúncias realizadas</label>
-	  						<input type="radio" id="apur" name="est" value="apur">
+	  						<input type="radio" id="apur" name="est" value="apur" required>
 	  						<label for="apur">Total de denúncias apuradas</label><br>
 					  	</div>
 					</div>
@@ -34,13 +34,13 @@
 			<div class="row">
 				<div class="column">
 					<div class="col-md-14 mb-4">
-						<input type="radio" id="per" name="filtro" value="per">
+						<input type="radio" id="per" name="filtro" value="per" required>
   						<label for="per">Período</label>
-  						<input type="radio" id="depto" name="filtro" value="depto">
+  						<input type="radio" id="depto" name="filtro" value="depto" required>
   						<label for="depto">Departamento</label>
-						<input type="radio" id="cont" name="filtro" value="cont">
+						<input type="radio" id="cont" name="filtro" value="cont" required>
   						<label for="cont">Contexto</label>
-  						<input type="radio" id="tipo" name="filtro" value="tipo">
+  						<input type="radio" id="tipo" name="filtro" value="tipo" required>
   						<label for="tipo">Tipo</label>
 				  	</div>
 				</div>			
@@ -50,15 +50,18 @@
 			<div class="row">
 				<div class="column">
 					<div class="col-md-14 mb-4">
-						<p><input type="submit" name="btn_plot" id="sctplot" value="Exibir scatter"></p>
-						<p><input type="submit" name="btn_plot" id="hstplot" value="Exibir histograma"></p>
-						<img src="{{grafico}}" alt="ERRO: GRÁFICO NÃO ENCONTRADO">
+						<input type="submit" name="btn_plot" id="btn_gen" value="Visualizar">
+						<input type="submit" name="btn_plot" id="sctplot" value="Exibir scatter">
+						<input type="submit" name="btn_plot" id="hstplot" value="Exibir histograma">
+						
 				  	</div>
 				</div>				
 			</div>	
 		</form>
     	</div>
 </div>
+
+<img src="{{grafico}}" alt="ERRO: GRÁFICO NÃO ENCONTRADO">
 
 <p> {{tipo}} </p>
 {% endblock %}
