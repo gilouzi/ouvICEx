@@ -1,27 +1,43 @@
 {% extends "base.html" %}
 {% block title %} ouvICEx - Estatísticas {% endblock %}
 {% block content %}
+ <style>
+ 
+   .column {
+    float: left;
+    padding: 10px;
+    height: 100%; /* Should be removed. Only for demonstration */
+  }
+
+  </style>
+
 
 <div class="jumbotron">
 	<div class="container-xl">
     		<h1 class="display-4">Estatísticas</h1>
     		<hr class="my-4">
 		<p class="lead">Escolha uma opção de estatística:</p>
+		<div class="row">
+			<form action="#" method="post">
+
+				<div class="column">
+					<div class="col-md-14 mb-4">
+						<input type="radio" id="real" name="est" value="real">
+  						<label for="real">Total de denúncias realizadas</label>
+  						<input type="radio" id="apur" name="est" value="apur">
+  						<label for="apur">Total de denúncias apuradas</label><br>
+				  	</div>
+				</div>
+			</form>
+		</div>		
+		
 		<hr class="my-4">
 		<p class="lead">Escolha o filtro:</p>
     	</div>
 </div>
 
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-           {% for msg in messages %}
-               <p>{{msg}}</p>
-           {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    {% for item in values %}
+<!--    {% for item in values %}
         <p>post: {{item.post}}, 
            date: {{item.date}},
            author_dep: {{item.author_dep}},
@@ -29,6 +45,7 @@
            context_t: {{item.context_t}},
            situation_t: {{item.situation_t}},</p>
     {% endfor %}
+-->
 <form action="#" method="post" id="graph_form">
 	<p><input type="submit" name="btn_plot" id="sctplot" value="Exibir scatter"></p>
 	<p><input type="submit" name="btn_plot" id="hstplot" value="Exibir histograma"></p>
