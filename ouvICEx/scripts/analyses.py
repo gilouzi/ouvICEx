@@ -5,18 +5,25 @@ from flask import Flask, Blueprint, render_template, request, send_file
 from scripts.database import posts, db
 
 app_analyses = Blueprint("app_analyses", __name__, template_folder="templates")
+
+def get_posts_df():
+	values = posts.query.all()
+	return type(values[0])
+
 @app_analyses.route("/analyses", methods=["POST", "GET"])
 def analyses():
 	
 	# simulação da leitura de dados do banco
 	X = np.random.randn(30)
 	Y = 2 * X
-	
+	tipo = '?'
 	
 	if request.method == "GET": # se estiver apenas carregando a página
+		
 		return render_template(
 			"analyses.html",
-	 		values = posts.query.all()
+	 		values = posts.query.all(),
+	 		tipo = get_posts_df()
 		)
 	elif request.method == "POST": # senão, se for o caso de requisição
 		grafico = "/static/graficos/" # folder base das imagens
@@ -34,6 +41,7 @@ def analyses():
 		return render_template( 
 			"analyses.html",
 	 		values = posts.query.all(),
-	 		grafico = grafico
+	 		grafico = grafico,
+	 		tipo = get_posts_df()
 		)
 		
