@@ -16,42 +16,49 @@
 	<div class="container-xl">
     		<h1 class="display-4">Estatísticas</h1>
     		<hr class="my-4">
-		<p class="lead">Escolha uma opção de estatística:</p>
-		<div class="row">
-			<form action="#" method="post">
-
+    		<form action="#" method="post" id="graph_form">
+			<p class="lead">Escolha uma opção de estatística:</p>
+			<div class="row">
+					<div class="column">
+						<div class="col-md-14 mb-4">
+							<input type="radio" id="real" name="est" value="real">
+	  						<label for="real">Total de denúncias realizadas</label>
+	  						<input type="radio" id="apur" name="est" value="apur">
+	  						<label for="apur">Total de denúncias apuradas</label><br>
+					  	</div>
+					</div>
+			</div>		
+			
+			<hr class="my-4">
+			<p class="lead">Filtrar por:</p>
+			<div class="row">
 				<div class="column">
 					<div class="col-md-14 mb-4">
-						<input type="radio" id="real" name="est" value="real">
-  						<label for="real">Total de denúncias realizadas</label>
-  						<input type="radio" id="apur" name="est" value="apur">
-  						<label for="apur">Total de denúncias apuradas</label><br>
+						<input type="radio" id="per" name="filtro" value="per">
+  						<label for="per">Período</label>
+  						<input type="radio" id="depto" name="filtro" value="depto">
+  						<label for="depto">Departamento</label>
+						<input type="radio" id="cont" name="filtro" value="cont">
+  						<label for="cont">Contexto</label>
+  						<input type="radio" id="tipo" name="filtro" value="tipo">
+  						<label for="tipo">Tipo</label>
 				  	</div>
-				</div>
-			</form>
-		</div>		
-		
-		<hr class="my-4">
-		<p class="lead">Escolha o filtro:</p>
+				</div>			
+			</div>	
+			
+			<hr class="my-4">
+			<div class="row">
+				<div class="column">
+					<div class="col-md-14 mb-4">
+						<p><input type="submit" name="btn_plot" id="sctplot" value="Exibir scatter"></p>
+						<p><input type="submit" name="btn_plot" id="hstplot" value="Exibir histograma"></p>
+						<img src="{{grafico}}" alt="ERRO: GRÁFICO NÃO ENCONTRADO">
+				  	</div>
+				</div>				
+			</div>	
+		</form>
     	</div>
 </div>
 
-
-<!--    {% for item in values %}
-        <p>post: {{item.post}}, 
-           date: {{item.date}},
-           author_dep: {{item.author_dep}},
-           ref_dep: {{item.ref_dep}},
-           context_t: {{item.context_t}},
-           situation_t: {{item.situation_t}},</p>
-    {% endfor %}
--->
-<form action="#" method="post" id="graph_form">
-	<p><input type="submit" name="btn_plot" id="sctplot" value="Exibir scatter"></p>
-	<p><input type="submit" name="btn_plot" id="hstplot" value="Exibir histograma"></p>
-</form>
-
-<!-- <img src="{{grafico_png}}" alt="ERRO: GRÁFICO NÃO ENCONTRADO"> -->
-<img src="{{grafico}}" alt="ERRO: GRÁFICO NÃO ENCONTRADO">
 <p> {{tipo}} </p>
 {% endblock %}
