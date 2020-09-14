@@ -24,14 +24,19 @@ def analyses():
 	# simulação da leitura de dados do banco
 	X = np.random.randn(30)
 	Y = 2 * X
-	tipo = '?'
 	
 	if request.method == "GET": # se estiver apenas carregando a página
+		grafico = "/static/graficos/empty.png"
+		titulo = ""
+		figura = plt.scatter([], []) # produz o gráfico
+		plt.savefig("ouvICEx" + grafico) # salva o gráfico
+		plt.close()
 		
 		return render_template(
 			"analyses.html",
 	 		values = posts.query.all(),
-	 		tipo = get_posts_df()
+			grafico = grafico,
+	 		titulo = titulo	 		
 		)
 	elif request.method == "POST": # senão, se for o caso de requisição
 		grafico = "/static/graficos/" # folder base das imagens
