@@ -1,2 +1,4 @@
 **/.vscode/
 **/posts.sqlite3
+ouvICEx/static/graficos/*
+**/__pycache__/
