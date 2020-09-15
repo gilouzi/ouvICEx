@@ -9,7 +9,7 @@ class posts(db.Model):
     author_dep = db.Column("author_dep", db.String(50))
     ref_dep = db.Column("ref_dep", db.String(50))
     context_t = db.Column("context_t", db.String(20))
-    situation_t = db.Column("situation_t", db.String(20))
+    situation_t = db.Column("situation_t", db.Boolean)
 
     def __init__(self, post, date, author_dep, ref_dep, context_t, situation_t):
         self.post = post
