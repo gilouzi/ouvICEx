@@ -10,6 +10,12 @@ def get_posts_df():
 	values = posts.query.all()
 	return type(values[0])
 
+def get_statistics(values, est, filtro):
+	labels = ['a', 'b']
+	totals = [5, 12]
+	
+	return labels, totals
+
 @app_analyses.route("/analyses", methods=["POST", "GET"])
 def analyses():
 	map_value_output = {
@@ -36,7 +42,7 @@ def analyses():
 			"analyses.html",
 	 		values = posts.query.all(),
 			grafico = grafico,
-	 		titulo = titulo	 		
+	 		titulo = titulo
 		)
 	elif request.method == "POST": # senão, se for o caso de requisição
 		grafico = "/static/graficos/" # folder base das imagens
@@ -45,13 +51,19 @@ def analyses():
 		est = map_value_output[est]
 		filt = map_value_output[filt]
 		titulo = est + ' por ' + filt
-		btn = str(request.form["btn_plot"]) # avalia qual botão foi clicado
-		if btn == "Exibir scatter": # se for o de scatter
-			figura = plt.scatter(X, Y) # produz o gráfico
-			grafico += "scatter1.png" # aponta pro local onde será salvo
-		elif btn == "Exibir histograma": # faz a mesma avaliação para todos botões possíveis
-			figura = plt.hist(X)
-			grafico += "hist1.png"
+		
+		labels, totals = get_statistics(posts.query.all(), est, filt)
+		
+		#btn = str(request.form["btn_plot"]) # avalia qual botão foi clicado		
+		#if btn == "Exibir scatter": # se for o de scatter
+		#	figura = plt.scatter(X, Y) # produz o gráfico
+		#	grafico += "scatter1.png" # aponta pro local onde será salvo
+		#elif btn == "Exibir histograma": # faz a mesma avaliação para todos botões possíveis
+		#	
+		#	grafico += "hist1.png"
+			
+		grafico += est + filt + ".png"
+		figura = plt.bar(labels, totals)
 		
 		#plt.title(titulo)
 		plt.savefig("ouvICEx" + grafico) # salva o gráfico
