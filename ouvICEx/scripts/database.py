@@ -18,3 +18,12 @@ class posts(db.Model):
         self.ref_dep = ref_dep
         self.context_t = context_t
         self.situation_t = situation_t
+
+class users(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    user = db.Column("user", db.String(50))
+    password = db.Column("password", db.String(50))
+
+    def __init__(self, user, password):
+        self.user = user
+        self.password = password

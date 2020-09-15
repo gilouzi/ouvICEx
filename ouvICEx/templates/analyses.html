@@ -1,23 +1,65 @@
 {% extends "base.html" %}
-{% block title %} Analyses Page{% endblock %}
+{% block title %} ouvICEx - Estatísticas {% endblock %}
 {% block content %}
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-           {% for msg in messages %}
-               <p>{{msg}}</p>
-           {% endfor %}
-        {% endif %}
-    {% endwith %}
+ <style>
+ 
+   .column {
+    float: left;
+    padding: 10px;
+    height: 100%; /* Should be removed. Only for demonstration */
+  }
 
-    {% for item in values %}
-        <p>post: {{item.post}}, 
-           date: {{item.date}},
-           author_dep: {{item.author_dep}},
-           ref_dep: {{item.ref_dep}},
-           context_t: {{item.context_t}},
-           situation_t: {{item.situation_t}},</p>
-    {% endfor %}
-<form action="#" method="get" id="graph_form">
-	<p><input type="submit" value="Exibir gráficos"></p>
-</form>
+  </style>
+
+
+<div class="jumbotron">
+	<div class="container-xl" style="width: 50%; float:left">
+    		<h1 class="display-4">Estatísticas</h1>
+    		<hr class="my-4">
+    		<form action="#" method="post" id="graph_form">
+			<p class="lead">Escolha uma opção de estatística:</p>
+			<div class="row">
+					<div class="column">
+						<div class="col-md-14 mb-4">
+							<input type="radio" id="real" name="est" value="real" required>
+	  						<label for="real">Total de denúncias realizadas</label>
+	  						<input type="radio" id="apur" name="est" value="apur" required>
+	  						<label for="apur">Total de denúncias apuradas</label><br>
+	  						<!-- <input type="radio" id="prev" name="est" value="prev" required>
+	  						<label for="prev">Tendência estatística do envio de denúncias</label><br> -->
+					  	</div>
+					</div>
+			</div>		
+			
+			<hr class="my-4">
+			<p class="lead">Filtrar por:</p>
+			<div class="row">
+				<div class="column">
+					<div class="col-md-14 mb-4">
+						<input type="radio" id="date" name="filtro" value="date" required>
+  						<label for="date">Período</label>
+  						<input type="radio" id="ref_dep" name="filtro" value="ref_dep" required>
+  						<label for="ref_dep">Departamento</label>
+						<input type="radio" id="context_t" name="filtro" value="context_t" required>
+  						<label for="context_t">Contexto</label>
+				  	</div>
+				</div>			
+			</div>	
+			
+			<hr class="my-4">
+			<div class="row">
+				<div class="column">
+					<div class="col-md-14 mb-4">
+						<input type="submit" name="btn_plot" id="btn_gen" value="Visualizar">
+						
+				  	</div>
+				</div>				
+			</div>	
+		</form>
+    	</div>
+    	
+    	<h2 class="display-6">{{titulo}}</h2>
+	<img src="{{grafico}}" alt="Selecione uma estatística e um filtro para visualizar o respectivo gráfico.">
+</div>
+
 {% endblock %}

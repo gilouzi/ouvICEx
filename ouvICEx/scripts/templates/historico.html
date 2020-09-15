@@ -1,45 +1,134 @@
 {% extends "base.html" %}
 {% block title %}Historico de todas as postagens{% endblock %}
 {% block content %}
-  <form action="#" method="post">
+<meta name="historico" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-    <action="/action_page.php">
-    <p> Departamento referenciado:</p>
-    <select id="ref_dpt" name="ref_dpt">
-      <option value="0">Please select</option>
-      {% for i in ref %}
-        <option value="{{i[0]}}">{{i[0]}}</option>
-      {% endfor %}
-    </select>
+  .column {
+    float: left;
+    padding: 10px;
+    height: 100%; /* Should be removed. Only for demonstration */
+  }
 
-    <p> Departamento do autor:</p>
-    <select id="author_dpt" name="author_dpt">
-      <option value="0">Please select</option>
-      {% for i in author %}
-        <option value="{{i[0]}}">{{i[0]}}</option>
-      {% endfor %}
-    </select>
+  .left {
+    width: 20%;
+  }
 
-    <p> Contexto da postagem:</p>
-    <select id="context" name="context">
-      <option value="0">Please select</option>
-      {% for i in context %}
-        <option value="{{i[0]}}">{{i[0]}}</option>
-      {% endfor %}
-    </select>
+  .right {
+    width: 80%;
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+  content: "";
+  display: table;
+  clear: both;
+  }
+  </style>
 
 
-    <input type="submit" value="submit">
+  <div class="jumbotron">
+  <div class="container-xl">
+    <h1 class="display-4">Histórico</h1>
+    <hr class="my-4">
+    <p class="lead">Abaixo você consegue filtrar as postagens que deseja ver:</p>
+    <div class="row">
+      <form action="#" method="post">
+        <action="/action_page.php">
 
-    <input type="reset" value="reset">
-    </form>
+        <div class="column">
+          <div class="col-md-14 mb-4">
+          <select class="form-control" id="ref_dpt" name="ref_dpt">
+            <option value="0">Departamento referenciado</option>
+            {% for i in ref %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
+        </div>
+        <div class="column">
+          <div class="col-md-12 mb-4">
+          <select class="form-control" id="author_dpt" name="author_dpt">
+            <option value="0">Departamento do autor</option>
+            {% for i in author %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
+      </div>
+      <div class="column">
+          <div class="col-md-12 mb-3">
+          <select class="form-control" id="context" name="context">
+            <option value="0">Contexto</option>
+            {% for i in context %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
+        </div>
+        <div class="column">
+          <div class="col-md-12 mb-3">
+          <select class="form-control" id="situation" name="situation">
+            <option value="0">Situação</option>
+            {% for i in situation %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
+        </div>
 
-  {% for item in values %}
-    <p>post: {{item.post}},
-       date: {{item.date}},
-       author_dep: {{item.author_dep}},
-       ref_dep: {{item.ref_dep}},
-       context_t: {{item.context_t}},
-       situation_t: {{item.situation_t}},</p>
+        <div class="column">
+        <input class="btn btn-outline-success" type="submit" value="Visualizar">
+        <input class="btn btn-outline-secondary" type="submit" value="Limpar filtros">
+
+        </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% for i in range(0, num_values, 3)  %}
+    <div class="card-columns">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Nome do autor/anonimo</h5>
+              <p class="card-text">{{values[i].post}}</p>
+              <li class="card-text">Departamento referenciado: {{values[i].ref_dep}}</li>
+              <li class="card-text">Departamento do autor: {{values[i].author_dep}}</li>
+              <p class="card-text"><small class="text-muted">Contexto: {{values[i].context_t}}</small></p>
+              <p class="card-text"><small class="text-muted">Situação: {{values[i].situation_t}},           {{values[i].date}}</small></p>
+            </div>
+          </div>
+        {% if i+1 < num_values %}
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Nome do autor/anonimo</h5>
+              <p class="card-text">{{values[i+1].post}}</p>
+              <li class="card-text">Departamento referenciado: {{values[i+1].ref_dep}}</li>
+              <li class="card-text">Departamento do autor: {{values[i+1].author_dep}}</li>
+              <p class="card-text"><small class="text-muted">Contexto: {{values[i+1].context_t}}</small></p>
+              <p class="card-text"><small class="text-muted">Situação: {{values[i+1].situation_t}},           {{values[i].date}}</small></p>
+            </div>
+        </div>
+        {% endif %}
+        {% if i+2 < num_values %}
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Nome do autor/anonimo</h5>
+              <p class="card-text">{{values[i+2].post}}</p>
+              <li class="card-text">Departamento referenciado: {{values[i+2].ref_dep}}</li>
+              <li class="card-text">Departamento do autor: {{values[i+2].author_dep}}</li>
+              <p class="card-text"><small class="text-muted">Contexto: {{values[i+2].context_t}}</small></p>
+              <p class="card-text"><small class="text-muted">Situação: {{values[i+2].situation_t}},           {{values[i].date}}</small></p>
+            </div>
+        </div>
+        {% endif %}
+      </div>
+
   {% endfor %}
+
 {% endblock %}
