@@ -6,15 +6,7 @@ from scripts.database import posts, db
 
 app_analyses = Blueprint("app_analyses", __name__, template_folder="templates")
 
-def get_posts_df():
-	values = posts.query.all()
-	return type(values[0])
-
 def get_statistics(values, est, filtro):
-	labels = ['a', 'b']
-	totals = [5, 12]
-	
-	#values[i]. ref_dep, author_dep, context_t, situation_t, date
 	categories = ['ref_dep', 'author_dep', 'context_t', 'situation_t', 'date']
 	dict_totals = {cat:{} for cat in categories}
 	for vl in values:
@@ -38,17 +30,15 @@ def get_statistics(values, est, filtro):
 		else:
 			dict_totals['situation_t'][vl.situation_t] += 1		
 			
-		if vl.date not in dict_totals['date'].keys(): # date
-			dict_totals['date'][vl.date] = 0
+		if str(vl.date) not in dict_totals['date'].keys(): # date
+			dict_totals['date'][str(vl.date)] = 0
 		else:
-			dict_totals['date'][vl.date] += 1				
+			dict_totals['date'][str(vl.date)] += 1				
 	
-	labels = dict_totals[filtro].keys()
-	totals = dict_totals[filtro].values()
+	labels = list(dict_totals[filtro].keys())
+	totals = list(dict_totals[filtro].values())
 	
-	labels = ['a', 'b']
-	totals = [5, 12]
-	return labels, totals
+	return labels, totals, dict_totals
 
 @app_analyses.route("/analyses", methods=["POST", "GET"])
 def analyses():
@@ -79,13 +69,16 @@ def analyses():
 		est = str(request.form["est"]) # avalia qual estatística foi selecionada
 		filt = str(request.form["filtro"]) # avalia qual filtro foi selecionado
 		
-		labels, totals = get_statistics(posts.query.all(), est, filt)
+		labels, totals, dict_totals = get_statistics(posts.query.all(), est, filt)
 			
-		est = map_value_output[est].replace(' ', '_')
-		filt = map_value_output[filt].replace(' ', '_')
+		est = map_value_output[est]
+		filt = map_value_output[filt]
 		titulo = est + ' por ' + filt
+		est = est.replace(' ', '_')
+		filt = filt.replace(' ', '_')
 		grafico += est + filt + ".png"
 		figura = plt.bar(labels, totals)
+		plt.xticks(rotation = 15)
 		
 		plt.savefig("ouvICEx" + grafico) # salva o gráfico
 		plt.close()
@@ -94,6 +87,7 @@ def analyses():
 			"analyses.html",
 	 		values = posts.query.all(),
 	 		grafico = grafico,
-	 		titulo = titulo
+	 		titulo = titulo,
+	 		dict_totals = labels
 		)
 		
