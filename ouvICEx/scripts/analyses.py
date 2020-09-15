@@ -14,6 +14,40 @@ def get_statistics(values, est, filtro):
 	labels = ['a', 'b']
 	totals = [5, 12]
 	
+	#values[i]. ref_dep, author_dep, context_t, situation_t, date
+	categories = ['ref_dep', 'author_dep', 'context_t', 'situation_t', 'date']
+	dict_totals = {cat:{} for cat in categories}
+	for vl in values:
+		if vl.ref_dep not in dict_totals['ref_dep'].keys(): # ref_dep
+			dict_totals['ref_dep'][vl.ref_dep] = 0
+		else:
+			dict_totals['ref_dep'][vl.ref_dep] += 1
+			
+		if vl.author_dep not in dict_totals['author_dep'].keys(): # author_dep
+			dict_totals['author_dep'][vl.author_dep] = 0
+		else:
+			dict_totals['author_dep'][vl.author_dep] += 1
+			
+		if vl.context_t not in dict_totals['context_t'].keys(): # context_t
+			dict_totals['context_t'][vl.context_t] = 0
+		else:
+			dict_totals['context_t'][vl.context_t] += 1		
+			
+		if vl.situation_t not in dict_totals['situation_t'].keys(): # situation_t
+			dict_totals['situation_t'][vl.situation_t] = 0
+		else:
+			dict_totals['situation_t'][vl.situation_t] += 1		
+			
+		if vl.date not in dict_totals['date'].keys(): # date
+			dict_totals['date'][vl.date] = 0
+		else:
+			dict_totals['date'][vl.date] += 1				
+	
+	labels = dict_totals[filtro].keys()
+	totals = dict_totals[filtro].values()
+	
+	labels = ['a', 'b']
+	totals = [5, 12]
 	return labels, totals
 
 @app_analyses.route("/analyses", methods=["POST", "GET"])
@@ -21,15 +55,11 @@ def analyses():
 	map_value_output = {
 		'real': 'Total de denúncias realizadas',
 		'apur': 'Total de denúncias apuradas',
-		'per': 'Período',
-		'depto': 'Departamento',
-		'cont': 'Contexto',
-		'tipo': 'Tipo'
+		'date': 'Período',
+		'ref_dep': 'Departamento',
+		'context_t': 'Contexto',
+		'situation_t': 'Tipo'
 	}
-	
-	# simulação da leitura de dados do banco
-	X = np.random.randn(30)
-	Y = 2 * X
 	
 	if request.method == "GET": # se estiver apenas carregando a página
 		grafico = "/static/graficos/empty.png"
@@ -48,24 +78,15 @@ def analyses():
 		grafico = "/static/graficos/" # folder base das imagens
 		est = str(request.form["est"]) # avalia qual estatística foi selecionada
 		filt = str(request.form["filtro"]) # avalia qual filtro foi selecionado
-		est = map_value_output[est]
-		filt = map_value_output[filt]
-		titulo = est + ' por ' + filt
 		
 		labels, totals = get_statistics(posts.query.all(), est, filt)
-		
-		#btn = str(request.form["btn_plot"]) # avalia qual botão foi clicado		
-		#if btn == "Exibir scatter": # se for o de scatter
-		#	figura = plt.scatter(X, Y) # produz o gráfico
-		#	grafico += "scatter1.png" # aponta pro local onde será salvo
-		#elif btn == "Exibir histograma": # faz a mesma avaliação para todos botões possíveis
-		#	
-		#	grafico += "hist1.png"
 			
+		est = map_value_output[est].replace(' ', '_')
+		filt = map_value_output[filt].replace(' ', '_')
+		titulo = est + ' por ' + filt
 		grafico += est + filt + ".png"
 		figura = plt.bar(labels, totals)
 		
-		#plt.title(titulo)
 		plt.savefig("ouvICEx" + grafico) # salva o gráfico
 		plt.close()
 		
