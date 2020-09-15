@@ -81,8 +81,9 @@
         </div>
 
         <div class="column">
-        <input class="btn btn-outline-success" type="submit" value="Submit">
-        <input class="btn btn-outline-secondary" type="reset" value="Reset">
+        <input class="btn btn-outline-success" type="submit" value="Visualizar">
+        <input class="btn btn-outline-secondary" type="submit" value="Limpar filtros">
+
         </div>
 
         </form>
@@ -91,9 +92,8 @@
   </div>
 
   {% for i in range(0, num_values, 3)  %}
-    <div class="row row-cols-1 row-cols-md-3">
-        <div class="col mb-3">
-          <div class="card h-100">
+    <div class="card-columns">
+          <div class="card">
             <div class="card-body">
               <h5 class="card-title">Nome do autor/anonimo</h5>
               <p class="card-text">{{values[i].post}}</p>
@@ -103,10 +103,8 @@
               <p class="card-text"><small class="text-muted">Situação: {{values[i].situation_t}},           {{values[i].date}}</small></p>
             </div>
           </div>
-        </div>
         {% if i+1 < num_values %}
-        <div class="col mb-3">
-          <div class="card h-100">
+          <div class="card">
             <div class="card-body">
               <h5 class="card-title">Nome do autor/anonimo</h5>
               <p class="card-text">{{values[i+1].post}}</p>
@@ -115,12 +113,10 @@
               <p class="card-text"><small class="text-muted">Contexto: {{values[i+1].context_t}}</small></p>
               <p class="card-text"><small class="text-muted">Situação: {{values[i+1].situation_t}},           {{values[i].date}}</small></p>
             </div>
-          </div>
         </div>
         {% endif %}
         {% if i+2 < num_values %}
-        <div class="col mb-3">
-          <div class="card h-100">
+          <div class="card">
             <div class="card-body">
               <h5 class="card-title">Nome do autor/anonimo</h5>
               <p class="card-text">{{values[i+2].post}}</p>
@@ -129,7 +125,6 @@
               <p class="card-text"><small class="text-muted">Contexto: {{values[i+2].context_t}}</small></p>
               <p class="card-text"><small class="text-muted">Situação: {{values[i+2].situation_t}},           {{values[i].date}}</small></p>
             </div>
-          </div>
         </div>
         {% endif %}
       </div>
