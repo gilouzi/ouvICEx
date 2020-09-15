@@ -3,6 +3,10 @@ from scripts.database import posts, db
 
 app_history = Blueprint("app_history", __name__, template_folder="templates")
 
+def okay():
+    #Moving forward code
+    print("Moving Forward...")
+
 def return_values(ref_dpt, author_dpt, context, situation):
     query = db.session.query(posts)
     if (ref_dpt != None):
