@@ -12,7 +12,7 @@ def form():
         author_dep = request.form["author_dep"]
         ref_dep = request.form["ref_dep"]
         context_t = request.form["context_t"]
-        situation_t = request.form["situation_t"]
+        situation_t = False
         envio = posts(post, date, author_dep, ref_dep, context_t, situation_t)
         db.session.add(envio)
         db.session.commit()
