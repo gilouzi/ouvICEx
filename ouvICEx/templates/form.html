@@ -8,9 +8,18 @@
        {% endfor %}
    {% endif %}
    {% endwith %}
+<script>
+    $(function() {
+        $('#identity').click(function() {
+            var cb1 = $('#identity').is(':checked');
+            $('#name').prop('disabled', !cb1); 
+            $('#is_checked').prop('value', cb1);
+        });
+    });
+</script>
 <form action="#" method="post" id="posts_form">
    <p>Post:</p>
-   <p><textarea form="posts_form" id="post" name="post" rows="5" cols="100" required></textarea></p>
+   <p><textarea form="posts_form" id="post" name="post" rows="5" cols="100" maxlength="500" required></textarea></p>
    <p>Seu departamento:</p>
    <p>
     <select id="author_dep" name="author_dep" required>
@@ -47,6 +56,10 @@
         </optgroup>
     </select>
    </p>
+   <input type="checkbox" id="identity" name="identity">
+   <label for="identity"> Eu gostaria de me identificar</label><br>
+   <input type="hidden" id="is_checked" name="is_checked">
+   <p><input type="text" id="name" name="name" maxlength="100" placeholder="Nome" disabled required/></p>
    <p><input type="submit" value="Enviar"></p>
 </form>
 {% endblock %}
