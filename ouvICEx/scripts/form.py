@@ -12,8 +12,13 @@ def form():
         author_dep = request.form["author_dep"]
         ref_dep = request.form["ref_dep"]
         context_t = request.form["context_t"]
+        is_checked = request.form["is_checked"]
+        if is_checked:
+            name = request.form["name"]
+        else:
+            name = "anônimo"
         situation_t = False
-        envio = posts(post, date, author_dep, ref_dep, context_t, situation_t)
+        envio = posts(post, name, date, author_dep, ref_dep, context_t, situation_t)
         db.session.add(envio)
         db.session.commit()
         flash("Informações enviadas!")
