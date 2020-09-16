@@ -1,14 +1,17 @@
 from flask import Flask, Blueprint, render_template, request, flash
 from scripts.database import posts, db
+from sqlalchemy import Date, func
+import datetime
 
 app_history = Blueprint("app_history", __name__, template_folder="templates")
 
-def okay():
-    #Moving forward code
-    print("Moving Forward...")
+def return_values(ref_dpt, author_dpt, context, situation, date_start):
 
-def return_values(ref_dpt, author_dpt, context, situation):
-    query = db.session.query(posts)
+    if (date_start != None):
+        query = db.session.query(posts).filter(posts.date>=date_start, posts.date<=datetime.date.today())
+    else:
+        query = db.session.query(posts)
+
     if (ref_dpt != None):
         query = query.filter_by(ref_dep=ref_dpt)
     if (author_dpt != None):
@@ -17,6 +20,7 @@ def return_values(ref_dpt, author_dpt, context, situation):
         query = query.filter_by(context_t=context)
     if (situation != None):
         query = query.filter_by(situation_t=situation)
+
     return query
 
 @app_history.route("/history", methods=["POST", "GET"])
@@ -27,6 +31,7 @@ def history():
         author_dpt = None
         context = None
         situation = None
+        date_start = None
         if request.form["ref_dpt"] != "0":
             ref_dpt = request.form["ref_dpt"]
         if request.form["author_dpt"] != "0":
@@ -35,8 +40,14 @@ def history():
             context = request.form["context"]
         if request.form["situation"] != "0":
             situation = request.form["situation"]
+        if request.form["start"] != "0000-00-00":
+            date_start = request.form["start"]
+            if date_start == " ":
+                print("oi")
+            print(date_start)
 
-        values_db = return_values(ref_dpt, author_dpt, context, situation)
+
+        values_db = return_values(ref_dpt, author_dpt, context, situation, date_start)
         return render_template("historico.html", values=values_db,
                 ref=db.session.query(posts.ref_dep.distinct()),
                 author=db.session.query(posts.author_dep.distinct()),
