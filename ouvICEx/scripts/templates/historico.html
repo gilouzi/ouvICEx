@@ -35,10 +35,9 @@
     <h1 class="display-4">Histórico</h1>
     <hr class="my-4">
     <p class="lead">Abaixo você consegue filtrar as postagens que deseja ver:</p>
-    <div class="row">
-      <form action="#" method="post">
-        <action="/action_page.php">
-
+    <form action="#" method="post">
+      <action="/action_page.php">
+      <div class="row">
         <div class="column">
           <div class="col-md-14 mb-4">
           <select class="form-control" id="ref_dpt" name="ref_dpt">
@@ -80,15 +79,32 @@
           </div>
         </div>
 
-        <div class="column">
-        <input class="btn btn-outline-success" type="submit" value="Visualizar">
-        <input class="btn btn-outline-secondary" type="submit" value="Limpar filtros">
-        <input type="date" id="start" name="start">
-        <input type="date" id="end" name="end">
+
+        </div>
+        <div class="row">
+          <div class="column">
+          <p>Data inicial:</p>
+          </div>
+          <div class="column">
+          <input class="form-control" type="date" id="start" name="start" value="Inicial">
+          </div>
+          <div class="column">
+          <p>Data final:</p>
+          </div>
+          <div class="column">
+          <input class="form-control" type="date" id="end" name="end">
+          </div>
+          <div class="column">
+          <input class="btn btn-outline-success" type="submit" value="Visualizar">
+          </div>
+          <div class="column">
+          <input class="btn btn-outline-secondary" type="submit" value="Limpar filtros">
+
+          </div>
         </div>
 
-        </form>
-      </div>
+      </form>
+
     </div>
   </div>
 
@@ -101,7 +117,11 @@
               <li class="card-text">Departamento referenciado: {{values[i].ref_dep}}</li>
               <li class="card-text">Departamento do autor: {{values[i].author_dep}}</li>
               <p class="card-text"><small class="text-muted">Contexto: {{values[i].context_t}}</small></p>
-              <p class="card-text"><small class="text-muted">Situação: {{values[i].situation_t}},           {{values[i].date}}</small></p>
+              {% if values[i].situation_t %}
+                <p class="card-text"><small class="text-muted">Situação: Resolvido, {{values[i].date}}</small></p>
+              {% else %}
+                <p class="card-text"><small class="text-muted">Situação: Não resolvido, {{values[i].date}}</small></p>
+              {% endif %}
             </div>
           </div>
         {% if i+1 < num_values %}
@@ -112,7 +132,11 @@
               <li class="card-text">Departamento referenciado: {{values[i+1].ref_dep}}</li>
               <li class="card-text">Departamento do autor: {{values[i+1].author_dep}}</li>
               <p class="card-text"><small class="text-muted">Contexto: {{values[i+1].context_t}}</small></p>
-              <p class="card-text"><small class="text-muted">Situação: {{values[i+1].situation_t}},           {{values[i].date}}</small></p>
+              {% if values[i+1].situation_t %}
+                <p class="card-text"><small class="text-muted">Situação: Resolvido, {{values[i+1].date}}</small></p>
+              {% else %}
+                <p class="card-text"><small class="text-muted">Situação: Não resolvido, {{values[i+1].date}}</small></p>
+              {% endif %}
             </div>
         </div>
         {% endif %}
@@ -124,7 +148,11 @@
               <li class="card-text">Departamento referenciado: {{values[i+2].ref_dep}}</li>
               <li class="card-text">Departamento do autor: {{values[i+2].author_dep}}</li>
               <p class="card-text"><small class="text-muted">Contexto: {{values[i+2].context_t}}</small></p>
-              <p class="card-text"><small class="text-muted">Situação: {{values[i+2].situation_t}},           {{values[i].date}}</small></p>
+              {% if values[i+2].situation_t %}
+                <p class="card-text"><small class="text-muted">Situação: Resolvido, {{values[i+2].date}}</small></p>
+              {% else %}
+                <p class="card-text"><small class="text-muted">Situação: Não resolvido, {{values[i+2].date}}</small></p>
+              {% endif %}
             </div>
         </div>
         {% endif %}
