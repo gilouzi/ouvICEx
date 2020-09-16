@@ -6,7 +6,7 @@ class posts(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     post = db.Column("post", db.String(500))
     name = db.Column("name", db.String(100))
-    date = db.Column("date", db.Date)
+    date = db.Column("date", db.Date())
     author_dep = db.Column("author_dep", db.String(50))
     ref_dep = db.Column("ref_dep", db.String(50))
     context_t = db.Column("context_t", db.String(20))
