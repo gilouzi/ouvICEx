@@ -7,13 +7,15 @@
     </head>
 
     <body>
-        {% set navigation_bar = [
+        {% set navigationBar = [
             ('/', 'home', 'Home'),
             ('/history', 'history', 'Histórico'),
             ('/analyses', 'analyses', 'Estatísticas'),
-            ('/form', 'form', 'Envie sua reclamação'),
-            ('/admin', 'admin', 'Administrador'),
-            ('/admin/login', 'admin/login', 'Login'),
+            ('/form', 'form', 'Envie sua reclamação')
+        ] -%}
+
+        {% set loggedInNavigationBar = [
+            ('/admin', 'admin', 'Admin'),
             ('/admin/logout', 'admin/logout', 'Logout')
         ] -%}
         
@@ -24,11 +26,25 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <ul id="navigation" class="navbar-nav">
-                {% for href, id, caption in navigation_bar %}
-                <li{% if id == active_page %} class="nav-item active"{% endif
-                %}><a class="nav-link" href="{{ href|e }}">{{ caption|e }} <span class="sr-only">(current)</span></a>
-                </li>
-            {% endfor %}
+                {% for href, id, caption in navigationBar %}
+                    <li{% if id == active_page %} class="nav-item active"{% endif
+                    %}><a class="nav-link" href="{{ href|e }}">{{ caption|e }} <span class="sr-only">(current)</span></a>
+                    </li>
+                {% endfor %}
+
+                {% if 'user' in session: %}
+                    {% for href, id, caption in loggedInNavigationBar %}
+                        <li{% if id == active_page %} class="nav-item active"{% endif
+                        %}><a class="nav-link" href="{{ href|e }}">{{ caption|e }} <span class="sr-only">(current)</span></a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if not 'user' in session: %}
+                    <li class="{{ 'active' if active_page == 'admin/login' else '' }}">
+                        <a class="nav-link" href="admin/login">Login <span class="sr-only">(current)</span></a>
+                    </li>
+                {% endif %}
             </ul>
         </nav>
         
