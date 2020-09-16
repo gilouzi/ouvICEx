@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
-from scripts.database import users
+from scripts.database import db, posts, users
 
 admin = Blueprint("admin", __name__, template_folder='templates/')
 
@@ -32,15 +32,24 @@ def logout():
 
     session.pop('user', None)
     session.pop('pwd', None)
-    return redirect(url_for("home"))
     return redirect(url_for("admin.login"))
+
+@admin.route('/changeStatus/<int:pid>/<int:status>')
+def changeStatus(pid, status):
+    if 'user' in session:
+        post = posts.query.get(pid)
+        post.situation_t = status
+        db.session.commit()
+        flash("Atualização feita com sucesso")
+    else:
+        flash("Você não possui permissão para realizar essa ação")
+        
+    return redirect(url_for("admin.view"))
 
 @admin.route('/')
 @admin.route('/view')
 def view():
     if 'user' in session:
-        return render_template('admin_view.html')
-    
         values = posts.query.all()
         return render_template('admin_view.html', posts=values)
         
