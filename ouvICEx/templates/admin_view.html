@@ -1,7 +1,18 @@
 {% extends 'base.html' %}
 {% set active_page = "admin" %}
-{% block title %} Login {% endblock %}
+{% block title %} Admin View {% endblock %}
 
 {% block content %}
-    <h1> Welcome back, admin! </h1>
+    {% for msg in get_flashed_messages() %}
+        <p>{{msg}}</p>
+    {% endfor %}
+
+    {% for p in posts %}
+    <p>
+        {{p.post}} ->
+        {% if p.situation_t %} Resolvido {% else %} Não Resolvido {% endif %}
+        <a href="changeStatus/{{p._id}}/1"> Marcar como resolvido </a>
+        <a href="changeStatus/{{p._id}}/0"> Marcar como não resolvido </a>
+    </p>
+    {% endfor %}
 {% endblock %}
