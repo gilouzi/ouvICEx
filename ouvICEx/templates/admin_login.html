@@ -3,26 +3,21 @@
 {% block title %} Login {% endblock %}
 
 {% block content %}
-    <div class="jumbotron">
-      <div class="container-xl">
-        <h1 class="display-4">Login</h1>
-        <hr class="my-4">
-      </div>
-    </div>
-
+    <meta name="login" content="width=device-width, initial-scale=1">
     {% for msg in get_flashed_messages() %}
       <p>{{msg}}</p>
     {% endfor %}
 
-    <div align="center">
-      <form class="form-signin" action="#" method="POST">
-          <div>
-            <input style="width: 300px" class="form-control" type="text"  name="user" placeholder="Informe seu usuário" required autofocus/>
-            <input style="width: 300px" class="form-control" type="password" name="pwd" placeholder="Informe sua senha" required autofocus/>
+    <div style="margin-top: 120px" align="center">
+      <img src="../static/user_icon.png" width="130px" height="130px">
+      <h1 style="padding-bottom: 10px;" class="h3 mb-3 font-weight-normal">Login</h1>
+      <form autocomplete="off" class="form-signin" action="#" method="POST">
+          <div style="width: 300px;">
+            <input class="form-control" type="text"  name="user" placeholder="Informe seu usuário" required autofocus/>
+            <input class="form-control" type="password" name="pwd" placeholder="Informe sua senha" required autofocus/>
           </div>
           <br>
-        <button style="width: 200px" class="btn btn-lg btn-primary btn-block" type="submit"> Entrar </button>
+        <button style="width: 200px !important;" class="btn btn-outline-secondary" type="submit">Entrar</button>
       </form>
-    </div>
-    
+    </div>  
 {% endblock %}
