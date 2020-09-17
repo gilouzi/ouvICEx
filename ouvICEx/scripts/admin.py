@@ -13,14 +13,14 @@ def login():
         if found_user:
             session['user'] = user
             session['pwd'] = pwd
-            flash("Bem vindo novamente, %s!" % (session['user']))
+            flash("Bem vindo novamente, %s!" % (session['user']), "info")
             return redirect(url_for('admin.view'))
         else:
-            flash("Usuário e/ou senha incorreto, tente novamente")
+            flash("Usuário e/ou senha incorreto, tente novamente", "danger")
             return render_template('admin_login.html')
     else:
         if 'user' in session:
-            flash("Você já se encontra logado no sistema!")
+            flash("Você já se encontra logado no sistema!", "info")
             return redirect(url_for('admin.view'))
 
     return render_template('admin_login.html')
@@ -28,7 +28,7 @@ def login():
 @admin.route('/logout')
 def logout():
     if 'user' in session:
-        flash("Logout feito com sucesso!")
+        flash("Logout feito com sucesso!", "success")
 
     session.pop('user', None)
     session.pop('pwd', None)
@@ -40,9 +40,9 @@ def changeStatus(pid, status):
         post = posts.query.get(pid)
         post.situation_t = status
         db.session.commit()
-        flash("Atualização feita com sucesso")
+        flash("Atualização feita com sucesso", "success")
     else:
-        flash("Você não possui permissão para realizar essa ação")
+        flash("Você não possui permissão para realizar essa ação", "danger")
         
     return redirect(url_for("admin.view"))
 

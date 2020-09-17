@@ -3,8 +3,10 @@
 {% block title %} Admin View {% endblock %}
 
 {% block content %}
-    {% for msg in get_flashed_messages() %}
-        <p>{{msg}}</p>
+    {% for msg in get_flashed_messages(with_categories=true) %}
+      <div class="alert alert-{{msg[0]}}" align="center" role="alert">
+        <p>{{msg[1]}}</p>
+      </div>
     {% endfor %}
 
     {% for p in posts %}
