@@ -7,16 +7,17 @@
     </head>
 
     <body>
-        {% set navigationBar = [
+        {% set defaultNavigationBar = [
             ('/', 'home', 'Home'),
             ('/history', 'history', 'Histórico'),
             ('/analyses', 'analyses', 'Estatísticas'),
-            ('/form', 'form', 'Envie sua reclamação')
+            ('/form', 'form', 'Envie sua reclamação'),
+            ('/login', 'login', 'Login')
         ] -%}
 
         {% set loggedInNavigationBar = [
             ('/admin', 'admin', 'Admin'),
-            ('/admin/logout', 'admin/logout', 'Logout')
+            ('/logout', 'logout', 'Logout')
         ] -%}
         
         {% set active_page = active_page|default('home') -%}
@@ -26,12 +27,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <ul id="navigation" class="navbar-nav">
-                {% for href, id, caption in navigationBar %}
-                    <li{% if id == active_page %} class="nav-item active"{% endif
-                    %}><a class="nav-link" href="{{ href|e }}">{{ caption|e }} <span class="sr-only">(current)</span></a>
-                    </li>
-                {% endfor %}
-
                 {% if 'user' in session: %}
                     {% for href, id, caption in loggedInNavigationBar %}
                         <li{% if id == active_page %} class="nav-item active"{% endif
@@ -39,9 +34,11 @@
                         </li>
                     {% endfor %}
                 {% else %}
-                    <li class="{{ 'active' if active_page == 'admin/login' else '' }}">
-                        <a class="nav-link" href="/admin/login">Login <span class="sr-only">(current)</span></a>
-                    </li>
+                    {% for href, id, caption in defaultNavigationBar %}
+                        <li{% if id == active_page %} class="nav-item active"{% endif
+                        %}><a class="nav-link" href="{{ href|e }}">{{ caption|e }} <span class="sr-only">(current)</span></a>
+                        </li>
+                    {% endfor %}
                 {% endif %}
             </ul>
         </nav>
