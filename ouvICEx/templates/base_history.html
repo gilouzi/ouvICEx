@@ -1,6 +1,4 @@
 {% extends "base.html" %}
-{% set active_page = "history" %}
-{% block title %}Historico de todas as postagens{% endblock %}
 {% block content %}
 <meta name="historico" content="width=device-width, initial-scale=1">
   <style>
@@ -33,7 +31,8 @@
 
   <div class="jumbotron">
   <div class="container-xl">
-    <h1 class="display-4">Histórico</h1>
+    {% block jumbotron %}
+    {% endblock %}
     <hr class="my-4">
     <p class="lead">Abaixo você consegue filtrar as postagens que deseja ver:</p>
     <form action="#" method="post">
@@ -74,7 +73,11 @@
           <select class="form-control" id="situation" name="situation">
             <option value="0">Situação</option>
             {% for i in situation %}
-              <option value="{{i[0]}}">{{i[0]}}</option>
+              {% if i[0] %}
+                <option value="{{i[0]}}">Resolvido</option>
+              {% else %}
+                <option value="{{i[0]}}">Não resolvido</option>
+              {% endif %}
             {% endfor %}
           </select>
           </div>
@@ -111,52 +114,25 @@
 
   {% for i in range(0, num_values, 3)  %}
     <div class="card-columns">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Nome do autor/anonimo</h5>
-              <p class="card-text">{{values[i].post}}</p>
-              <li class="card-text">Departamento referenciado: {{values[i].ref_dep}}</li>
-              <li class="card-text">Departamento do autor: {{values[i].author_dep}}</li>
-              <p class="card-text"><small class="text-muted">Contexto: {{values[i].context_t}}</small></p>
-              {% if values[i].situation_t %}
-                <p class="card-text"><small class="text-muted">Situação: Resolvido, {{values[i].date}}</small></p>
-              {% else %}
-                <p class="card-text"><small class="text-muted">Situação: Não resolvido, {{values[i].date}}</small></p>
-              {% endif %}
-            </div>
-          </div>
-        {% if i+1 < num_values %}
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Nome do autor/anonimo</h5>
-              <p class="card-text">{{values[i+1].post}}</p>
-              <li class="card-text">Departamento referenciado: {{values[i+1].ref_dep}}</li>
-              <li class="card-text">Departamento do autor: {{values[i+1].author_dep}}</li>
-              <p class="card-text"><small class="text-muted">Contexto: {{values[i+1].context_t}}</small></p>
-              {% if values[i+1].situation_t %}
-                <p class="card-text"><small class="text-muted">Situação: Resolvido, {{values[i+1].date}}</small></p>
-              {% else %}
-                <p class="card-text"><small class="text-muted">Situação: Não resolvido, {{values[i+1].date}}</small></p>
-              {% endif %}
-            </div>
-        </div>
-        {% endif %}
-        {% if i+2 < num_values %}
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Nome do autor/anonimo</h5>
-              <p class="card-text">{{values[i+2].post}}</p>
-              <li class="card-text">Departamento referenciado: {{values[i+2].ref_dep}}</li>
-              <li class="card-text">Departamento do autor: {{values[i+2].author_dep}}</li>
-              <p class="card-text"><small class="text-muted">Contexto: {{values[i+2].context_t}}</small></p>
-              {% if values[i+2].situation_t %}
-                <p class="card-text"><small class="text-muted">Situação: Resolvido, {{values[i+2].date}}</small></p>
-              {% else %}
-                <p class="card-text"><small class="text-muted">Situação: Não resolvido, {{values[i+2].date}}</small></p>
-              {% endif %}
-            </div>
-        </div>
-        {% endif %}
+        {% for j in range (0, 3) %}
+          {% if i+j < num_values %}
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{values[j+i].name}}</h5>
+                  <p class="card-text">{{values[j+i].post}}</p>
+                  <li class="card-text">Departamento referenciado: {{values[j+i].ref_dep}}</li>
+                  <li class="card-text">Departamento do autor: {{values[j+i].author_dep}}</li>
+                  <p class="card-text"><small class="text-muted">Contexto: {{values[j+i].context_t}}</small></p>
+                  {% if values[j+i].situation_t %}
+                    <p class="card-text"><small class="text-muted">Situação: Resolvido, {{values[j+i].date}}</small></p>
+                  {% else %}
+                    <p class="card-text"><small class="text-muted">Situação: Não resolvido, {{values[j+i].date}}</small></p>
+                  {% endif %}
+                </div>
+              </div>
+          {% endif %}
+        {% endfor %}
+
       </div>
 
   {% endfor %}
