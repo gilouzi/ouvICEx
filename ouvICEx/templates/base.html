@@ -2,41 +2,47 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>{% block title %}{% endblock %}</title>
     </head>
 
     <body>
+        {% set defaultNavigationBar = [
+            ('/', 'home', 'Home'),
+            ('/history', 'history', 'Histórico'),
+            ('/analyses', 'analyses', 'Estatísticas'),
+            ('/form', 'form', 'Envie sua reclamação'),
+            ('/login', 'login', 'Login')
+        ] -%}
+
+        {% set loggedInNavigationBar = [
+            ('/admin', 'admin', 'Admin'),
+            ('/logout', 'logout', 'Logout')
+        ] -%}
+        
+        {% set active_page = active_page|default('home') -%}
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">ouvICEx</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/history">Histórico</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/analyses">Estatísticas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/form">Envie sua reclamação</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin">Administrador</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/logout">Logout</a>
-                </li>
-                </ul>
-            </div>
-          </nav>
+            <ul id="navigation" class="navbar-nav">
+                {% if 'user' in session: %}
+                    {% for href, id, caption in loggedInNavigationBar %}
+                        <li{% if id == active_page %} class="nav-item active"{% endif
+                        %}><a class="nav-link" href="{{ href|e }}">{{ caption|e }} <span class="sr-only">(current)</span></a>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    {% for href, id, caption in defaultNavigationBar %}
+                        <li{% if id == active_page %} class="nav-item active"{% endif
+                        %}><a class="nav-link" href="{{ href|e }}">{{ caption|e }} <span class="sr-only">(current)</span></a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </nav>
+        
         {% block content %}
         {% endblock %}
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

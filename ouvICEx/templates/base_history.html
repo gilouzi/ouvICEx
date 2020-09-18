@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block content %}
+<meta name="historico" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .mybox {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .column {
+      float: left;
+      padding: 10px;
+      height: 100%; /* Should be removed. Only for demonstration */
+    }
+
+    .left {
+      width: 20%;
+    }
+
+    .right {
+      width: 80%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+  </style>
+
+  {% block flash_messages %}
+  {% endblock %}
+
+  <div class="jumbotron">
+  <div class="container-xl">
+    {% block jumbotron %}
+    {% endblock %}
+    <hr class="my-4">
+    <p class="lead">Abaixo você consegue filtrar as postagens que deseja ver:</p>
+    <form action="#" method="post">
+      <action="/action_page.php">
+      <div class="row">
+        <div class="column">
+          <div class="col-md-14 mb-4">
+          <select class="form-control" id="ref_dpt" name="ref_dpt">
+            <option value="0"hidden>Departamento referenciado
+            {% for i in ref %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
+        </div>
+        <div class="column">
+          <div class="col-md-12 mb-4">
+          <select class="form-control" id="author_dpt" name="author_dpt">
+            <option value="0"hidden>Departamento do autor</option>
+            {% for i in author %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
+      </div>
+      <div class="column">
+          <div class="col-md-12 mb-3">
+          <select class="form-control" id="context" name="context">
+            <option value="0"hidden>Contexto</option>
+            {% for i in context %}
+              <option value="{{i[0]}}">{{i[0]}}</option>
+            {% endfor %}
+          </select>
+          </div>
+        </div>
+        <div class="column">
+          <div class="col-md-12 mb-3">
+          <select class="form-control" id="situation" name="situation">
+            <option value="-1"hidden>Situação</option>
+            {% for i in situation %}
+              {% if i[0] == 1 %}
+                <option value="{{i[0]}}">Resolvido</option>
+              {% else %}
+                <option value="{{i[0]}}">Não resolvido</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          </div>
+        </div>
+
+
+        </div>
+        <div class="row">
+          <div class="column">
+          <p>Data inicial:</p>
+          </div>
+          <div class="column">
+          <input class="form-control" type="date" id="start" name="start" value="Inicial">
+          </div>
+          <div class="column">
+          <p>Data final:</p>
+          </div>
+          <div class="column">
+          <input class="form-control" type="date" id="end" name="end">
+          </div>
+          <div class="column">
+          <input class="btn btn-outline-success" type="submit" value="Visualizar">
+          </div>
+          <div class="column">
+          <a class="btn btn-outline-secondary" href="cleaning/{{active_page}}">Limpar filtros</a>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  {% for i in range(0, num_values, 3)  %}
+    <div class="card-columns">
+        {% for j in range (0, 3) %}
+          {% if i+j < num_values %}
+              <div class="card">
+                <div class="card-body">
+
+                  <div class="mybox">
+                    <h5 class="card-title">{{values[j+i].name}}</h5>
+                    {% if active_page == "admin" %}
+                      {% if values[j+i].situation_t == 1 %}
+                        <a class="btn btn-outline-danger" href="changeStatus/{{values[j+i]._id}}">
+                          Cancelar
+                        </a>
+                      {% else %}
+                        <a class="btn btn-outline-success" href="changeStatus/{{values[j+i]._id}}">
+                          Resolver
+                        </a>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+
+                  <p class="card-text">{{values[j+i].post}}</p>
+                  <li class="card-text">Departamento referenciado: {{values[j+i].ref_dep}}</li>
+                  <li class="card-text">Departamento do autor: {{values[j+i].author_dep}}</li>
+                  <p class="card-text"><small class="text-muted">Contexto: {{values[j+i].context_t}}</small></p>
+                  {% if values[j+i].situation_t == 1 %}
+                    <p class="card-text"><small class="text-muted">Situação: Resolvido, {{values[j+i].date}}</small></p>
+                  {% else %}
+                    <p class="card-text"><small class="text-muted">Situação: Não resolvido, {{values[j+i].date}}</small></p>
+                  {% endif%}
+                </div>
+              </div>
+          {% endif %}
+        {% endfor %}
+
+      </div>
+
+  {% endfor %}
+
+{% endblock %}
