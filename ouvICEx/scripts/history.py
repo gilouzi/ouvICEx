@@ -17,13 +17,13 @@ def db_filters(ref_dpt, author_dpt, context, situation, date_start, date_end):
         query = db.session.query(posts)
 
     if (ref_dpt != None):
-        query = query.filter_by(ref_dep=ref_dpt)
+        query = query.filter(posts.ref_dep==ref_dpt)
     if (author_dpt != None):
-        query = query.filter_by(author_dep=author_dpt)
+        query = query.filter(posts.author_dep==author_dpt)
     if (context != None):
-        query = query.filter_by(context_t=context)
+        query = query.filter(posts.context_t==context)
     if (situation != None):
-        query = query.filter_by(situation_t=situation)
+        query = query.filter(posts.situation_t==situation)
 
     return query
 

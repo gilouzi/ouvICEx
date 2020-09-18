@@ -41,7 +41,7 @@
         <div class="column">
           <div class="col-md-14 mb-4">
           <select class="form-control" id="ref_dpt" name="ref_dpt">
-            <option value="0">Departamento referenciado</option>
+            <option value="0"hidden>Departamento referenciado
             {% for i in ref %}
               <option value="{{i[0]}}">{{i[0]}}</option>
             {% endfor %}
@@ -51,7 +51,7 @@
         <div class="column">
           <div class="col-md-12 mb-4">
           <select class="form-control" id="author_dpt" name="author_dpt">
-            <option value="0">Departamento do autor</option>
+            <option value="0"hidden>Departamento do autor</option>
             {% for i in author %}
               <option value="{{i[0]}}">{{i[0]}}</option>
             {% endfor %}
@@ -61,7 +61,7 @@
       <div class="column">
           <div class="col-md-12 mb-3">
           <select class="form-control" id="context" name="context">
-            <option value="0">Contexto</option>
+            <option value="0"hidden>Contexto</option>
             {% for i in context %}
               <option value="{{i[0]}}">{{i[0]}}</option>
             {% endfor %}
@@ -71,9 +71,9 @@
         <div class="column">
           <div class="col-md-12 mb-3">
           <select class="form-control" id="situation" name="situation">
-            <option value="0">Situação</option>
+            <option value="0"hidden>Situação</option>
             {% for i in situation %}
-              {% if i[0] %}
+              {% if i[0] == 1 %}
                 <option value="{{i[0]}}">Resolvido</option>
               {% else %}
                 <option value="{{i[0]}}">Não resolvido</option>
@@ -123,11 +123,11 @@
                   <li class="card-text">Departamento referenciado: {{values[j+i].ref_dep}}</li>
                   <li class="card-text">Departamento do autor: {{values[j+i].author_dep}}</li>
                   <p class="card-text"><small class="text-muted">Contexto: {{values[j+i].context_t}}</small></p>
-                  {% if values[j+i].situation_t %}
+                  {% if values[j+i].situation_t == 1 %}
                     <p class="card-text"><small class="text-muted">Situação: Resolvido, {{values[j+i].date}}</small></p>
                   {% else %}
                     <p class="card-text"><small class="text-muted">Situação: Não resolvido, {{values[j+i].date}}</small></p>
-                  {% endif %}
+                  {% endif%}
                 </div>
               </div>
           {% endif %}
