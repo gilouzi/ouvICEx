@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, flash
+from flask import Flask, Blueprint, redirect, url_for, render_template, request, flash
 from scripts.database import posts, db
 from sqlalchemy import Date, func
 import datetime
@@ -40,7 +40,7 @@ def return_request(request):
         author_dpt = request.form["author_dpt"]
     if request.form["context"] != "0":
         context = request.form["context"]
-    if request.form["situation"] != "0":
+    if request.form["situation"] != "-1":
         situation = request.form["situation"]
     if request.form["start"]:
         date_start = request.form["start"]
@@ -48,6 +48,19 @@ def return_request(request):
         date_end = request.form["end"]
 
     return db_filters(ref_dpt, author_dpt, context, situation, date_start, date_end)
+
+
+@app_history.route("/cleaning/history")
+def cleaning():
+
+    render_template("history.html", values=posts.query.all(),
+        ref=db.session.query(posts.ref_dep.distinct()),
+        author=db.session.query(posts.author_dep.distinct()),
+        context=db.session.query(posts.context_t.distinct()),
+        situation=db.session.query(posts.situation_t.distinct()),
+        num_values= posts.query.count())
+
+    return redirect(url_for("app_history.history"))
 
 @app_history.route("/history", methods=["POST", "GET"])
 def history():
