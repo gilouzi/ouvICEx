@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session, flash
+from scripts.history import return_request
 from scripts.database import db, posts, users
 
 admin = Blueprint("admin", __name__, template_folder='templates/')
@@ -34,11 +35,11 @@ def logout():
     session.pop('pwd', None)
     return redirect(url_for("admin.login"))
 
-@admin.route('/changeStatus/<int:pid>/<int:status>')
-def changeStatus(pid, status):
+@admin.route('/changeStatus/<int:pid>')
+def changeStatus(pid):
     if 'user' in session:
         post = posts.query.get(pid)
-        post.situation_t = status
+        post.situation_t = 0 if post.situation_t == 1 else 1
         db.session.commit()
         flash("Atualização feita com sucesso", "success")
     else:
@@ -46,11 +47,25 @@ def changeStatus(pid, status):
         
     return redirect(url_for("admin.view"))
 
-@admin.route('/')
-@admin.route('/view')
+@admin.route('/', methods=["POST", "GET"])
+@admin.route('/view', methods=["POST", "GET"])
 def view():
     if 'user' in session:
-        values = posts.query.all()
-        return render_template('admin_view.html', posts=values)
+        if request.method == "POST":
+            values_db = return_request(request)
+
+            return render_template("admin_view.html", values=values_db,
+                ref=db.session.query(posts.ref_dep.distinct()),
+                author=db.session.query(posts.author_dep.distinct()),
+                context=db.session.query(posts.context_t.distinct()),
+                situation=db.session.query(posts.situation_t.distinct()),
+                num_values= values_db.count())
+        else:
+            return render_template("admin_view.html", values=posts.query.all(),
+                    ref=db.session.query(posts.ref_dep.distinct()),
+                    author=db.session.query(posts.author_dep.distinct()),
+                    context=db.session.query(posts.context_t.distinct()),
+                    situation=db.session.query(posts.situation_t.distinct()),
+                    num_values= posts.query.count())
         
     return redirect(url_for("admin.login"))
