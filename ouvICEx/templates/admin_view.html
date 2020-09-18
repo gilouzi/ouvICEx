@@ -13,8 +13,8 @@
     <p>
         {{p.post}} ->
         {% if p.situation_t %} Resolvido {% else %} Não Resolvido {% endif %}
-        <a href="changeStatus/{{p._id}}/1"> Marcar como resolvido </a>
-        <a href="changeStatus/{{p._id}}/0"> Marcar como não resolvido </a>
+        <a href="changeStatus/{{p._id}}/1"> Resolver </a>
+        <a href="changeStatus/{{p._id}}/0"> Cancelar resolução </a>
     </p>
     {% endfor %}
 {% endblock %}
