@@ -18,6 +18,10 @@
             ('/admin', 'admin', 'Admin'),
             ('/admin/logout', 'admin/logout', 'Logout')
         ] -%}
+
+        {% set loggedOffNavigationBar = [
+            ('/admin/login', 'admin/login', 'Login')
+        ] -%}
         
         {% set active_page = active_page|default('home') -%}
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -41,9 +45,11 @@
                 {% endif %}
 
                 {% if not 'user' in session: %}
-                    <li class="{{ 'active' if active_page == 'admin/login' else '' }}">
-                        <a class="nav-link" href="admin/login">Login <span class="sr-only">(current)</span></a>
-                    </li>
+                    {% for href, id, caption in loggedOffNavigationBar %}
+                        <li{% if id == active_page %} class="nav-item active"{% endif
+                        %}><a class="nav-link" href="{{ href|e }}">{{ caption|e }} <span class="sr-only">(current)</span></a>
+                        </li>
+            {% endfor %}
                 {% endif %}
             </ul>
         </nav>
