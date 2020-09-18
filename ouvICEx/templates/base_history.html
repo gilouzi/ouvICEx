@@ -6,28 +6,36 @@
       box-sizing: border-box;
     }
 
-  .column {
-    float: left;
-    padding: 10px;
-    height: 100%; /* Should be removed. Only for demonstration */
-  }
+    .mybox {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-  .left {
-    width: 20%;
-  }
+    .column {
+      float: left;
+      padding: 10px;
+      height: 100%; /* Should be removed. Only for demonstration */
+    }
 
-  .right {
-    width: 80%;
-  }
+    .left {
+      width: 20%;
+    }
 
-  /* Clear floats after the columns */
-  .row:after {
-  content: "";
-  display: table;
-  clear: both;
-  }
+    .right {
+      width: 80%;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
   </style>
 
+  {% block flash_messages %}
+  {% endblock %}
 
   <div class="jumbotron">
   <div class="container-xl">
@@ -118,7 +126,22 @@
           {% if i+j < num_values %}
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">{{values[j+i].name}}</h5>
+                  
+                  <div class="mybox">
+                    <h5 class="card-title">{{values[j+i].name}}</h5>
+                    {% if active_page == "admin" %}
+                      {% if values[j+i].situation_t == 1 %}
+                        <a class="btn btn-outline-danger" href="changeStatus/{{values[j+i]._id}}">
+                          Cancelar
+                        </a>
+                      {% else %}
+                        <a class="btn btn-outline-success" href="changeStatus/{{values[j+i]._id}}">
+                          Resolver
+                        </a>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                  
                   <p class="card-text">{{values[j+i].post}}</p>
                   <li class="card-text">Departamento referenciado: {{values[j+i].ref_dep}}</li>
                   <li class="card-text">Departamento do autor: {{values[j+i].author_dep}}</li>
