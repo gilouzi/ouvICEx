@@ -17,7 +17,7 @@ def form():
             name = request.form["name"]
         else:
             name = "anônimo"
-        situation_t = False
+        situation_t = 0
         envio = posts(post, name, date, author_dep, ref_dep, context_t, situation_t)
         db.session.add(envio)
         db.session.commit()
