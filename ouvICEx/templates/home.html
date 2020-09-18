@@ -1,9 +1,21 @@
 {% extends "base.html" %}
+{% set active_page = "home" %}
 {% block title %} Home Page{% endblock %}
 {% block content %}
-    <h2>Explicação do funcionamento do sistema:</h2>
-        <p>Faça as suas denúncias de forma anônima ou não. É só ir no formulário e enviar os seus comentários. Para ler outras denúncias, vá a página de denúncias para ler.</p>
 
-    <h2>Porque criamos o ouvICEx???</h2>
-        <p>Nosso propósito é fazer com que os alunos tenham um espaço aberto para exporem tudo que os incomoda para que possamos sempre saber o que devemos cobrar e de quem, de forma a criar um ambiente mais saudável dentro dos corredores do ICEx.</p>
+<div class="jumbotron">
+    <div class="container-xl">
+        <h1 class="display-4">Home</h1>
+    <hr class="my-4">
+    </div>
+</div>
+<div class="container-xl">
+    <h2>Porque criamos o ouvICEx?</h2>
+        <p class="lead">Nosso propósito é fazer com que os alunos tenham um espaço aberto para exporem tudo que os incomoda. Com isso, podemos levar esses dados às pessoas cabíveis para que assim possamos, juntos, criar um ambiente mais saudável dentro dos corredores (agora onlines) do ICEx.</p>
+        <hr class="my-4">
+    <h2>Explicação do funcionamento do sistema:</h2>
+        <p class="lead">Faça as suas denúncias, sugestões e reclamações de forma anônima ou não. Basta ir na aba "Envie sua reclamação" e enviar os seus comentários. </p>
+
+        <p class="lead">Para ler denúncias já feitas, vá até a página de histórico. Terá a possibilidade de ver todas denúncias já feitas ou filtrar por departamento, contexto, etc.</p>
+    </div>
 {% endblock %}
