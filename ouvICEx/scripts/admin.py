@@ -47,7 +47,7 @@ def changeStatus(pid):
 
     return redirect(url_for("admin.view"))
 
-@admin.route("/cleaning/admin")
+@app_admin.route("/cleaning/admin")
 def cleaning():
 
     render_template("history.html", values=posts.query.all(),
