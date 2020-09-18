@@ -79,7 +79,7 @@
         <div class="column">
           <div class="col-md-12 mb-3">
           <select class="form-control" id="situation" name="situation">
-            <option value="0"hidden>Situação</option>
+            <option value="-1"hidden>Situação</option>
             {% for i in situation %}
               {% if i[0] == 1 %}
                 <option value="{{i[0]}}">Resolvido</option>
@@ -110,8 +110,7 @@
           <input class="btn btn-outline-success" type="submit" value="Visualizar">
           </div>
           <div class="column">
-          <input class="btn btn-outline-secondary" type="submit" value="Limpar filtros">
-
+          <a class="btn btn-outline-secondary" href="cleaning/{{active_page}}">Limpar filtros</a>
           </div>
         </div>
 
@@ -126,7 +125,7 @@
           {% if i+j < num_values %}
               <div class="card">
                 <div class="card-body">
-                  
+
                   <div class="mybox">
                     <h5 class="card-title">{{values[j+i].name}}</h5>
                     {% if active_page == "admin" %}
@@ -141,7 +140,7 @@
                       {% endif %}
                     {% endif %}
                   </div>
-                  
+
                   <p class="card-text">{{values[j+i].post}}</p>
                   <li class="card-text">Departamento referenciado: {{values[j+i].ref_dep}}</li>
                   <li class="card-text">Departamento do autor: {{values[j+i].author_dep}}</li>

@@ -44,7 +44,19 @@ def changeStatus(pid):
         flash("Atualização feita com sucesso", "success")
     else:
         flash("Você não possui permissão para realizar essa ação", "danger")
-        
+
+    return redirect(url_for("admin.view"))
+
+@admin.route("/cleaning/admin")
+def cleaning():
+
+    render_template("history.html", values=posts.query.all(),
+        ref=db.session.query(posts.ref_dep.distinct()),
+        author=db.session.query(posts.author_dep.distinct()),
+        context=db.session.query(posts.context_t.distinct()),
+        situation=db.session.query(posts.situation_t.distinct()),
+        num_values= posts.query.count())
+
     return redirect(url_for("admin.view"))
 
 @app_admin.route('/', methods=["POST", "GET"])
@@ -67,5 +79,5 @@ def view():
                     context=db.session.query(posts.context_t.distinct()),
                     situation=db.session.query(posts.situation_t.distinct()),
                     num_values= posts.query.count())
-        
+
     return redirect(url_for("admin.login"))
