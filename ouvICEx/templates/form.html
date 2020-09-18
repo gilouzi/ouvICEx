@@ -3,11 +3,13 @@
 {% block title %} Form Page{% endblock %}
 {% block content %}
    {% with messages = get_flashed_messages() %}
-   {% if messages %}
-       {% for msg in messages %}
-           <p>{{msg}}</p>
-       {% endfor %}
-   {% endif %}
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="alert alert-success" align="center" role="alert">
+                    <p>{{msg}}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
    {% endwith %}
 <script>
     $(function() {
