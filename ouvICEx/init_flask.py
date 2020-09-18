@@ -8,7 +8,7 @@ from scripts.analyses import app_analyses
 from scripts.database import db, posts, users
 
 app = Flask(__name__)
-app.register_blueprint(app_admin, url_prefix="/admin")
+app.register_blueprint(app_admin, url_prefix="")
 app.register_blueprint(app_history, url_prefix="")
 app.register_blueprint(app_form, url_prefix="")
 app.register_blueprint(app_analyses, url_prefix="")

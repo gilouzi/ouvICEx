@@ -15,16 +15,16 @@ def login():
             session['user'] = user
             session['pwd'] = pwd
             flash("Bem vindo novamente, %s!" % (session['user']), "info")
-            return redirect(url_for('admin.view'))
+            return redirect(url_for('.view'))
         else:
             flash("Usuário e/ou senha incorreto, tente novamente", "danger")
-            return render_template('admin_login.html')
+            return render_template('login.html')
     else:
         if 'user' in session:
             flash("Você já se encontra logado no sistema!", "info")
-            return redirect(url_for('admin.view'))
+            return redirect(url_for('.view'))
 
-    return render_template('admin_login.html')
+    return render_template('login.html')
 
 @app_admin.route('/logout')
 def logout():
@@ -33,7 +33,7 @@ def logout():
 
     session.pop('user', None)
     session.pop('pwd', None)
-    return redirect(url_for("admin.login"))
+    return redirect(url_for(".login"))
 
 @app_admin.route('/changeStatus/<int:pid>')
 def changeStatus(pid):
@@ -45,7 +45,7 @@ def changeStatus(pid):
     else:
         flash("Você não possui permissão para realizar essa ação", "danger")
 
-    return redirect(url_for("admin.view"))
+    return redirect(url_for(".view"))
 
 @app_admin.route("/cleaning/admin")
 def cleaning():
@@ -57,27 +57,26 @@ def cleaning():
         situation=db.session.query(posts.situation_t.distinct()),
         num_values= posts.query.count())
 
-    return redirect(url_for("admin.view"))
+    return redirect(url_for(".view"))
 
-@app_admin.route('/', methods=["POST", "GET"])
-@app_admin.route('/view', methods=["POST", "GET"])
+@app_admin.route('/admin', methods=["POST", "GET"])
 def view():
     if 'user' in session:
         if request.method == "POST":
             values_db = return_request(request)
 
-            return render_template("admin_view.html", values=values_db,
+            return render_template("admin.html", values=values_db,
                 ref=db.session.query(posts.ref_dep.distinct()),
                 author=db.session.query(posts.author_dep.distinct()),
                 context=db.session.query(posts.context_t.distinct()),
                 situation=db.session.query(posts.situation_t.distinct()),
                 num_values= values_db.count())
         else:
-            return render_template("admin_view.html", values=posts.query.all(),
+            return render_template("admin.html", values=posts.query.all(),
                     ref=db.session.query(posts.ref_dep.distinct()),
                     author=db.session.query(posts.author_dep.distinct()),
                     context=db.session.query(posts.context_t.distinct()),
                     situation=db.session.query(posts.situation_t.distinct()),
                     num_values= posts.query.count())
 
-    return redirect(url_for("admin.login"))
+    return redirect(url_for(".login"))

@@ -12,12 +12,12 @@
             ('/history', 'history', 'Histórico'),
             ('/analyses', 'analyses', 'Estatísticas'),
             ('/form', 'form', 'Envie sua reclamação'),
-            ('/admin/login', 'admin/login', 'Login')
+            ('/login', 'login', 'Login')
         ] -%}
 
         {% set loggedInNavigationBar = [
             ('/admin', 'admin', 'Admin'),
-            ('/admin/logout', 'admin/logout', 'Logout')
+            ('/logout', 'logout', 'Logout')
         ] -%}
         
         {% set active_page = active_page|default('home') -%}
