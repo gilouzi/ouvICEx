@@ -28,49 +28,67 @@
 </div>
 <div class="container-xl">
     <form action="#" method="post" id="posts_form">
-        <p>Post:</p>
-        <p><textarea form="posts_form" id="post" name="post" rows="5" cols="100" maxlength="500" required></textarea></p>
-        <p>Seu departamento:</p>
-        <p>
-            <select id="author_dep" name="author_dep" required>
-                <option value="DCC">Ciência da Computação</option>
-                <option value="DEST">Estatística</option>
-                <option value="DF">Física</option>
-                <option value="DMAT">Matemática</option>
-                <option value="DQ">Química</option>
-                <option value="outro">Outro</option>
-            </select>
-        </p> 
-        <p>Departamento citado:</p>
-        <p>
-            <select id="ref_dep" name="ref_dep" required>
-                <option value="DCC">Ciência da Computação</option>
-                <option value="DEST">Estatística</option>
-                <option value="DF">Física</option>
-                <option value="DMAT">Matemática</option>
-                <option value="DQ">Química</option>
-            </select>
-        </p>
-        <p>Contexto:</p>
-        <p>
-            <select id="context_t" name="context_t" required>
-                <option value="sugestão">Sugestão</option>
-                <option value="reclamação">Reclamação</option>
-                <optgroup label="Denúncia">
-                    <option value="assédio moral">Assédio moral</option>
-                    <option value="assédio sexual">Assédio sexual</option>
-                    <option value="LGBTfobia">LGBTfobia</option>
-                    <option value="Machismo">Machismo</option>
-                    <option value="Racismo">Racismo</option>
-                    <option value="Outro">Outro</option>
-                </optgroup>
-            </select>
-        </p>
-        <input type="checkbox" id="identity" name="identity">
-        <label for="identity"> Eu gostaria de me identificar</label><br>
-        <input type="hidden" id="is_checked" name="is_checked">
-        <p><input type="text" id="name" name="name" maxlength="100" placeholder="Nome" disabled required/></p>
-        <p><input type="submit" value="Enviar"></p>
+        <div class="form-group">
+            <label class="control-label lead">Comentário:</label>
+            <div>
+                <textarea class="form-control" form="posts_form" id="post" name="post" maxlength="500" required></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label lead">Seu departamento:</label>
+            <div>
+                <select class="form-control" id="author_dep" name="author_dep" required>
+                    <option value="DCC">Ciência da Computação</option>
+                    <option value="DEST">Estatística</option>
+                    <option value="DF">Física</option>
+                    <option value="DMAT">Matemática</option>
+                    <option value="DQ">Química</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label lead">Departamento citado:</label>
+            <div>
+                <select class="form-control" id="ref_dep" name="ref_dep" required>
+                    <option value="DCC">Ciência da Computação</option>
+                    <option value="DEST">Estatística</option>
+                    <option value="DF">Física</option>
+                    <option value="DMAT">Matemática</option>
+                    <option value="DQ">Química</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label lead">Contexto:</label>
+            <div>
+                <select class="form-control" id="context_t" name="context_t" required>
+                    <option value="sugestão">Sugestão</option>
+                    <option value="reclamação">Reclamação</option>
+                    <optgroup label="Denúncia">
+                        <option value="assédio moral">Assédio moral</option>
+                        <option value="assédio sexual">Assédio sexual</option>
+                        <option value="LGBTfobia">LGBTfobia</option>
+                        <option value="Machismo">Machismo</option>
+                        <option value="Racismo">Racismo</option>
+                        <option value="Outro">Outro</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="control-label" type="checkbox" id="identity" name="identity">
+            <label class="control-label lead" for="identity"> Eu gostaria de me identificar: </label>
+            <input type="hidden" id="is_checked" name="is_checked">
+        </div>
+        <div class="form-group">
+            <input class="control-label lead" type="text" id="name" name="name" maxlength="100" disabled required/>
+        </div>
+        <div class="form-group">        
+            <div>
+                <input class="btn btn-outline-secondary" type="submit" value="Enviar">
+            </div>
+        </div>
      </form>
 </div>
 {% endblock %}
