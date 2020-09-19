@@ -1,4 +1,7 @@
 import matplotlib.pyplot as plt
+import datetime
+import os
+import glob
 from flask import Flask, Blueprint, render_template, request, send_file
 from scripts.database import posts, db
 
@@ -85,8 +88,14 @@ def analyses():
 		filt = filt.replace(' ', '_')
 		
 		# produz e salva o gráfico
-		grafico += est + filt + ".png"
-		figura = plt.bar(labels, totals)
+		#grafico += est + filt + ".png"
+		grafico += str(datetime.datetime.now()).replace(" ", "_").replace(".", "__").replace(":", "___") + ".png"
+		
+		fig, ax = plt.subplots(1, 1)
+		ax.bar(labels, totals, width = 0.5, color = 'grey')
+		ax.set_xlim([None, 4])
+		#figura = plt.bar(labels, totals, width = 0.5, color = 'grey')
+		
 		plt.xticks(rotation = 15)
 		plt.savefig("ouvICEx" + grafico)
 		plt.close()
