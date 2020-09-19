@@ -24,19 +24,19 @@ def get_statistics(values, filtro, est):
 	for vl in values: # para cada post soma 1 no dicionário de cada grupo na chave específica
 		if vl.situation_t == est:
 			if vl.ref_dep not in dict_totals['ref_dep'].keys(): # ref_dep
-				dict_totals['ref_dep'][vl.ref_dep] = 0
+				dict_totals['ref_dep'][vl.ref_dep] = 1
 			else:
 				dict_totals['ref_dep'][vl.ref_dep] += 1
 			if vl.author_dep not in dict_totals['author_dep'].keys(): # author_dep
-				dict_totals['author_dep'][vl.author_dep] = 0
+				dict_totals['author_dep'][vl.author_dep] = 1
 			else:
 				dict_totals['author_dep'][vl.author_dep] += 1
 			if vl.context_t not in dict_totals['context_t'].keys(): # context_t
-				dict_totals['context_t'][vl.context_t] = 0
+				dict_totals['context_t'][vl.context_t] = 1
 			else:
 				dict_totals['context_t'][vl.context_t] += 1		
 			if str(vl.date) not in dict_totals['date'].keys(): # date
-				dict_totals['date'][str(vl.date)] = 0
+				dict_totals['date'][str(vl.date)] = 1
 			else:
 				dict_totals['date'][str(vl.date)] += 1				
 	
