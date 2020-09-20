@@ -47,15 +47,15 @@ Sistema web de ouvidoria pra denúncias e reclamações aberto aos alunos do ICE
     - Adicionar botão que marca as postagens como resolvidas ou não (Thiago)
     - Criar filtros específicos por data, departamento (denunciado e usuário), tipo e estado da postagem. (Isadora)
 
-- Rodando o projeto
+### Rodando o projeto
  - Este projeto foi construído para ser executado em ambiente Linux
- - Clone o repositório
- - Forneça permissões de execução ao arquivo de setup e execução
- ```
- chmod +x setup_and_run.sh 
- ```
- - Execute o arquivo .sh
- ```
- ./setup_and_run.sh
- ```
- - O .sh cria um ambiente virtual, baixa os requirements, cria a variável de ambiente necessária (FLASK_APP) e inicia o servidor da aplicação. Copie o endereço de IP e porta mostrados no terminal após a execução do .sh e cole em um navegador para ter acesso à interface do projeto.
+ 1. Clone o repositório
+ 2. Forneça permissões de execução ao arquivo de setup e execução
+    ```
+    chmod +x setup_and_run.sh 
+    ```
+ 3. Execute o arquivo .sh
+    ```
+    ./setup_and_run.sh
+    ```
+       O .sh cria um ambiente virtual, baixa os requirements, cria a variável de ambiente necessária (FLASK_APP) e inicia o servidor da aplicação. Copie o endereço de IP e porta mostrados no terminal após a execução do .sh e cole em um navegador para ter acesso à interface do projeto.
