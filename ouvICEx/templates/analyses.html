@@ -3,7 +3,7 @@
 {% block title %} ouvICEx - Estatísticas {% endblock %}
 {% block content %}
  <style>
- 
+
    .column {
     float: left;
     padding: 10px;
@@ -30,8 +30,8 @@
 	  						<label for="prev">Tendência estatística do envio de denúncias</label><br> -->
 					  	</div>
 					</div>
-			</div>		
-			
+			</div>
+
 			<hr class="my-4">
 			<p class="lead">Filtrar por:</p>
 			<div class="row">
@@ -44,21 +44,21 @@
 						<input type="radio" id="context_t" name="filtro" value="context_t" required>
   						<label for="context_t">Contexto</label>
 				  	</div>
-				</div>			
-			</div>	
-			
+				</div>
+			</div>
+
 			<hr class="my-4">
 			<div class="row">
 				<div class="column">
 					<div class="col-md-14 mb-4">
-						<input type="submit" name="btn_plot" id="btn_gen" value="Visualizar">
-						
+						<input class="btn btn-outline-success" type="submit" name="btn_plot" id="btn_gen" value="Visualizar">
+
 				  	</div>
-				</div>				
-			</div>	
+				</div>
+			</div>
 		</form>
     	</div>
-    	
+
     	<h2 class="display-6">{{titulo}}</h2>
 	<img src="{{grafico}}" alt="Selecione uma estatística e um filtro para visualizar o respectivo gráfico.">
 </div>
