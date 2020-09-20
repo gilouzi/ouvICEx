@@ -4,7 +4,7 @@ db = SQLAlchemy()
 
 class posts(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
-    post = db.Column("post", db.String(500))
+    post = db.Column("post", db.String(1000))
     name = db.Column("name", db.String(100))
     date = db.Column("date", db.Date())
     author_dep = db.Column("author_dep", db.String(50))
