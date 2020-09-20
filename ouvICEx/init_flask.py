@@ -12,6 +12,7 @@ app.register_blueprint(app_admin, url_prefix="")
 app.register_blueprint(app_history, url_prefix="")
 app.register_blueprint(app_form, url_prefix="")
 app.register_blueprint(app_analyses, url_prefix="")
+app.secret_key = "secret_key"
 app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.sqlite3'
 
