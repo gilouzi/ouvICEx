@@ -42,6 +42,9 @@ def get_statistics(values, filtro, est, test_case = False):
 			else:
 				dict_totals['date'][str(vl.date)] += 1				
 	
+	if test_case == 2:
+		return dict_totals
+		
 	# formata a saída para listas
 	labels = list(dict_totals[filtro].keys())
 	totals = list(dict_totals[filtro].values())
