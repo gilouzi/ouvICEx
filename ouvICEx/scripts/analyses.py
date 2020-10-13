@@ -3,11 +3,11 @@ import datetime
 import os
 import glob
 from flask import Flask, Blueprint, render_template, request, send_file
-from scripts.database import posts, db
+from database import posts, db
 
 app_analyses = Blueprint("app_analyses", __name__, template_folder="templates")
 
-def get_statistics(values, filtro, est):
+def get_statistics(values, filtro, est, test_case = False):
 	"""
 		Agrupa o dado (values) por uma chave especificada (filtro), retornando
 		o que é necessário para plotagem de gráficos.
@@ -19,6 +19,8 @@ def get_statistics(values, filtro, est):
 			totals: tamanhos das barras do barplot
 	"""
 	est = 0 if est == 'real' else 1 # alores possíveis de 'situation_t', realizadas (0) e apuradas (1)
+	if test_case == 1:
+		return est
 	categories = ['ref_dep', 'author_dep', 'context_t', 'date'] # categorias possíveis de agrupamento
 	dict_totals = {cat:{} for cat in categories} # cada categoria possui seu dicionário
 	for vl in values: # para cada post soma 1 no dicionário de cada grupo na chave específica
@@ -106,4 +108,7 @@ def analyses():
 	 		grafico = grafico,
 	 		titulo = titulo
 		)
+		
+		
+
 		
