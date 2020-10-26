@@ -64,7 +64,6 @@ def cleaning():
 
 @app_history.route("/history", methods=["POST", "GET"])
 def history():
-    dict_ref = {}
 
     if request.method == "POST":
         values_db = return_request(request)
